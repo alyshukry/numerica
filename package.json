@@ -1,7 +1,7 @@
 {
   "name": "numerica",
   "version": "0.1.0",
-  "description": "numbers",
+  "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": ["dist"],
@@ -12,6 +12,10 @@
   "keywords": [
     "number", "numbers", "numerica", "numerals", "format"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alyshukry/numerica.git"
+  },
   "author": "Aly Shukry <alyshukry.dev@gmail.com> (https://alyshukry.works)",
   "license": "MIT"
 }
