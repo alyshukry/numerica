@@ -2,3 +2,4 @@ dist
 .npmignore
 TODO
 node_modules
+docs-app
