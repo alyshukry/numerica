@@ -17,3 +17,5 @@ function abbreviate(n: number, d: number = 1): string {
 }
 
 export default abbreviate
+
+console.log(abbreviate(3992992, 0))

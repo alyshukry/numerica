@@ -1,7 +1,7 @@
 {
   "name": "numerica",
   "version": "0.1.0",
-  "description": "",
+  "description": "🔢 A useful number formatting library for frontend developers.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": ["dist"],
@@ -10,7 +10,7 @@
     "build": "tsc"
   },
   "keywords": [
-    "number", "numbers", "numerica", "numerals", "format"
+    "number", "numbers", "numerica", "numerals", "format", "frontend"
   ],
   "repository": {
     "type": "git",

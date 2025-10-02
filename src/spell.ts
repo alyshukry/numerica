@@ -53,3 +53,5 @@ function spell(n: number, hyphens: boolean = false, and: boolean = false, separa
             .join(separator)
     )
 }
+
+export default spell
