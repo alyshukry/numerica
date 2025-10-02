@@ -9,7 +9,10 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "tsc",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "keywords": [
     "number",
@@ -24,5 +27,8 @@
     "url": "git+https://github.com/alyshukry/numerica.git"
   },
   "author": "Aly Shukry <alyshukry.dev@gmail.com> (https://alyshukry.works)",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "vitepress": "^2.0.0-alpha.12"
+  }
 }

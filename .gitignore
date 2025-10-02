@@ -1,3 +1,4 @@
 dist
 .npmignore
 TODO
+node_modules
