@@ -30,19 +30,19 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ./docs-app
+        working-directory: ./docs
     steps:
       - name: Checkout
         uses: actions/checkout@v4
       - name: Detect package manager
         id: detect-package-manager
         run: |
-          if [ -f "${{ github.workspace }}/docs-app/yarn.lock" ]; then
+          if [ -f "${{ github.workspace }}/docs/yarn.lock" ]; then
             echo "manager=yarn" >> $GITHUB_OUTPUT
             echo "command=install" >> $GITHUB_OUTPUT
             echo "runner=yarn" >> $GITHUB_OUTPUT
             exit 0
-          elif [ -f "${{ github.workspace }}/docs-app/package.json" ]; then
+          elif [ -f "${{ github.workspace }}/docs/package.json" ]; then
             echo "manager=npm" >> $GITHUB_OUTPUT
             echo "command=ci" >> $GITHUB_OUTPUT
             echo "runner=npx --no-install" >> $GITHUB_OUTPUT
@@ -56,7 +56,7 @@ jobs:
         with:
           node-version: "20"
           cache: ${{ steps.detect-package-manager.outputs.manager }}
-          cache-dependency-path: './docs-app/package-lock.json'
+          cache-dependency-path: './docs/package-lock.json'
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
@@ -69,7 +69,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ./docs-app/.next/cache
+            ./docs/.next/cache
           # Generate a new cache whenever packages or source files change.
           key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json', '**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
           # If source files changed but packages didn't, rebuild from a prior cache.
@@ -82,7 +82,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./docs-app/out
+          path: ./docs/out
 
   # Deployment job
   deploy:
