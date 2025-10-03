@@ -1,4 +1,4 @@
-function convertBase(n: number | string, to: number, from: number = 10): string {
+export function convertBase(n: number | string, to: number, from: number = 10): string {
     const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
 
     if (to > chars.length || from > chars.length) throw new Error(`Largest base supported is ${chars.length}.`)
@@ -31,5 +31,3 @@ function convertBase(n: number | string, to: number, from: number = 10): string 
 
     return result.join('') || "0"
 }
-
-export default convertBase

@@ -1,0 +1,8 @@
+{
+  "entryPoints": ["./src/index.ts"],
+  "json": "docs/data/api/docs.json",
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "readme": "none"
+}

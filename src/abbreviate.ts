@@ -1,4 +1,4 @@
-function abbreviate(n: number, d: number = 1): string {
+export function abbreviate(n: number, d: number = 1): string {
     // Get the number of digits
     const digits = n.toString().length
     // Get how many 000's are before the first number
@@ -15,7 +15,3 @@ function abbreviate(n: number, d: number = 1): string {
 
     return string
 }
-
-export default abbreviate
-
-console.log(abbreviate(3992992, 0))

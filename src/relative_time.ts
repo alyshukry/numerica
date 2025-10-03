@@ -16,7 +16,7 @@ interface Options {
     includeSuffix?: boolean
 }
 
-function relativeTime(
+export function relativeTime(
     date: Date,
     {
         now = new Date(),
@@ -57,5 +57,3 @@ function relativeTime(
 
     return string
 }
-
-export default relativeTime

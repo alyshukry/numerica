@@ -1,31 +1,33 @@
 {
-  "name": "numerica",
-  "version": "1.0.1",
-  "description": "🔢 A useful number formatting library for frontend developers.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
-  },
-  "keywords": [
-    "number",
-    "numbers",
-    "numerica",
-    "numerals",
-    "format",
-    "frontend"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/alyshukry/numerica.git"
-  },
-  "author": "Aly Shukry <alyshukry.dev@gmail.com> (https://alyshukry.works)",
-  "license": "MIT",
-  "devDependencies": {
-    "vitepress": "^2.0.0-alpha.12"
-  }
+    "name": "numerica",
+    "version": "1.0.1",
+    "description": "🔢 A useful number formatting library for frontend developers.",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "tsc",
+        "docs:generate": "typedoc"
+    },
+    "keywords": [
+        "number",
+        "numbers",
+        "numerica",
+        "numerals",
+        "format",
+        "frontend"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/alyshukry/numerica.git"
+    },
+    "author": "Aly Shukry <alyshukry.dev@gmail.com> (https://alyshukry.works)",
+    "license": "MIT",
+    "devDependencies": {
+        "typedoc": "^0.28.13",
+        "vitepress": "^2.0.0-alpha.12"
+    }
 }

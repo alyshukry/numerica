@@ -12,7 +12,58 @@ const THOUSANDS = [
     "", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion"
 ]
 
-function spell(n: number, hyphens: boolean = false, and: boolean = false, separator: string = " "): string {
+/**
+ * Converts a number into its written word representation
+ * 
+ * @param n - The number to convert (must be a non-negative integer)
+ * @param hyphens - Whether to use hyphens between tens and ones (e.g., "twenty-one" vs "twenty one"). Default: false
+ * @param and - Whether to include "and" after hundreds (e.g., "one hundred and twenty" vs "one hundred twenty"). Default: false
+ * @param separator - The separator to use between words. Default: " " (space)
+ * @returns The number spelled out as words
+ * 
+ * @example
+ * Basic usage
+ * ```ts
+ * spell(42)
+ * // Returns: "forty two"
+ * ```
+ * 
+ * @example
+ * With hyphens
+ * ```ts
+ * spell(42, true)
+ * // Returns: "forty-two"
+ * ```
+ * 
+ * @example
+ * With "and" after hundreds
+ * ```ts
+ * spell(123, false, true)
+ * // Returns: "one hundred and twenty three"
+ * ```
+ * 
+ * @example
+ * Large numbers
+ * ```ts
+ * spell(1234567)
+ * // Returns: "one million two hundred thirty four thousand five hundred sixty seven"
+ * ```
+ * 
+ * @example
+ * Custom separator
+ * ```ts
+ * spell(42, false, false, "_")
+ * // Returns: "forty_two"
+ * ```
+ * 
+ * @example
+ * Zero
+ * ```ts
+ * spell(0)
+ * // Returns: "zero"
+ * ```
+ */
+export function spell(n: number, hyphens: boolean = false, and: boolean = false, separator: string = " "): string {
     if (n === 0) return "zero"
     let string: string[] = []
 
@@ -53,5 +104,3 @@ function spell(n: number, hyphens: boolean = false, and: boolean = false, separa
             .join(separator)
     )
 }
-
-export default spell
