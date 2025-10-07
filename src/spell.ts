@@ -100,15 +100,17 @@ export function spell(n: number, hyphens: boolean = false, and: boolean = false,
         n = Math.floor(n / 1000)
     }
 
-    // Handling decimals
     string = string.reverse()
-    string.push("point")
-    for (let i = 0; i < decimals.length; i++) string.push(ONES[decimals[i]])
+
+    // Handling decimals
+    if (decimals.length > 0) {
+        string.push("point")
+        for (let i = 0; i < decimals.length; i++) string.push(ONES[decimals[i]])
+    }
 
     return (
-        string
-            .join(separator)
+        string.join(separator)
     )
 }
 
-console.log(spell(123456789.123))
+console.log(spell(123456789))
