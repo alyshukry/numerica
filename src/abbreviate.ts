@@ -1,4 +1,14 @@
-export function abbreviate(n: number, d: number = 1): string {
+interface Options {
+    d?: number
+}
+
+export function abbreviate(
+    n: number,
+    {
+        d = 1
+
+    }: Options = {}): string {
+        
     // Get the number of digits
     const digits = n.toString().length
     // Get how many 000's are before the first number

@@ -26,6 +26,7 @@ export function relativeTime(
         includeSuffix = true
 
     }: Options = {}): string {
+        
     const time = date.getTime() - now.getTime()
     const timeVal = Math.abs(time)
 

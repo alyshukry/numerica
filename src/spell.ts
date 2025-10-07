@@ -12,6 +12,12 @@ const THOUSANDS = [
     "", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion"
 ]
 
+interface Options {
+    hyphens?: boolean,
+    and?: boolean,
+    separator?: string
+}
+
 /**
  * Converts a number into its written word representation
  * 
@@ -63,7 +69,15 @@ const THOUSANDS = [
  * // Returns: "zero"
  * ```
  */
-export function spell(n: number, hyphens: boolean = false, and: boolean = false, separator: string = " "): string {
+export function spell(
+    n: number,
+    {
+        hyphens = false,
+        and = false,
+        separator = " "
+
+    }: Options = {}): string {
+
     if (n === 0) return "zero"
     let string: string[] = []
 

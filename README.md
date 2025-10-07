@@ -13,7 +13,7 @@ npm  install  numerica
 import … from "numerica"
 ```
 
-## 📖 API Reference
+## 📖 API Reference (Not up to date!!!!)
 ```js
 function abbreviate(n: number, d?: number = 1): string
 ```
