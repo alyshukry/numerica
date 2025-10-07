@@ -1,5 +1,5 @@
 export * from "./abbreviate"
-export * from "./convert_base"
-export * from "./relative_time"
+export * from "./convert-base"
+export * from "./relative-time"
 export * from "./separate"
 export * from "./spell"
