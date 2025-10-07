@@ -67,14 +67,16 @@ export function spell(n: number, hyphens: boolean = false, and: boolean = false,
     if (n === 0) return "zero"
     let string: string[] = []
 
+    const decimals: number[] = n.toString().includes('.') ? [...n.toString().split('.')[1]].map(Number) : []
+
     let i = -1
-    while (n > 0) {
+    while (n >= 1) {
         i++
 
         // Convert chunk into a three digit word
         let chunk = n % 1000
         let wordChunk: string = ""
-        if (chunk > 0) {
+        if (chunk >= 1) {
             let words: string[] = []
 
             if (chunk >= 100) {
@@ -83,7 +85,7 @@ export function spell(n: number, hyphens: boolean = false, and: boolean = false,
             }
             if (chunk >= 20) {
                 let tens = TENS[Math.floor(chunk / 10)]
-                let ones = chunk % 10 > 0 ? (hyphens ? "-" : separator) + ONES[chunk % 10] : ""
+                let ones = chunk % 10 > 0 ? (hyphens ? "-" : separator) + ONES[Math.floor(chunk % 10)] : ""
                 words.push(tens + ones)
             }
             else if (chunk >= 10) words.push(TEENS[chunk - 10])
@@ -98,9 +100,15 @@ export function spell(n: number, hyphens: boolean = false, and: boolean = false,
         n = Math.floor(n / 1000)
     }
 
+    // Handling decimals
+    string = string.reverse()
+    string.push("point")
+    for (let i = 0; i < decimals.length; i++) string.push(ONES[decimals[i]])
+
     return (
         string
-            .reverse()
             .join(separator)
     )
 }
+
+console.log(spell(123456789.123))
