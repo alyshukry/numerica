@@ -2,6 +2,3 @@ dist
 .npmignore
 TODO
 node_modules
-jsdoc.json
-tsconfig.json
-.npmignore
