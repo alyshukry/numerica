@@ -5,7 +5,11 @@ export default function Home() {
     useEffect(() => {
         fetch("./api/docs.json")
             .then(res => res.json())
-            .then(data => console.log(data))
+            .then(data => {
+                data.forEach((symbol: { name: any; description: any; }) => {
+                console.log(symbol.name, symbol.description)
+            })
+            })
             .catch(err => console.error(err));
     }, []);
 
