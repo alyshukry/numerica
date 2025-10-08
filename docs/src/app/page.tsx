@@ -6,9 +6,9 @@ export default function Home() {
         fetch("./api/docs.json")
             .then(res => res.json())
             .then(data => {
-                data.forEach((symbol: { name: any; description: any; }) => {
-                console.log(symbol.name, symbol.description)
-            })
+                data.forEach((symbol: { name: unknown; description: unknown; }) => {
+                    console.log(symbol.name, symbol.description)
+                })
             })
             .catch(err => console.error(err));
     }, []);
