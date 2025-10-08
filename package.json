@@ -10,7 +10,7 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "tsc",
-        "docs:generate": "typedoc"
+        "docs:generate": "jsdoc -c jsdoc.json"
     },
     "keywords": [
         "number",
@@ -27,7 +27,8 @@
     "author": "Aly Shukry <alyshukry.dev@gmail.com> (https://alyshukry.works)",
     "license": "MIT",
     "devDependencies": {
-        "typedoc": "^0.28.13",
-        "vitepress": "^2.0.0-alpha.12"
+        "docdash": "^2.0.2",
+        "documentation": "^14.0.3",
+        "jsdoc": "^4.0.5"
     }
 }

@@ -19,55 +19,34 @@ interface Options {
 }
 
 /**
- * Converts a number into its written word representation
- * 
- * @param n - The number to convert (must be a non-negative integer)
- * @param hyphens - Whether to use hyphens between tens and ones (e.g., "twenty-one" vs "twenty one"). Default: false
- * @param and - Whether to include "and" after hundreds (e.g., "one hundred and twenty" vs "one hundred twenty"). Default: false
- * @param separator - The separator to use between words. Default: " " (space)
- * @returns The number spelled out as words
- * 
+ * Converts a number into its English words representation.
+ *
+ * This function handles both integer and decimal parts of the number.
+ * It supports optional formatting for hyphens between tens and ones, 
+ * inclusion of "and" in hundreds, and a custom separator between words.
+ *
+ * @param {number} n - The number to convert. Can be an integer or float.
+ * @param {Object} [options] - Optional settings for formatting.
+ * @param {boolean} [options.hyphens=false] - Whether to include hyphens between tens and ones (e.g., "twenty-one").
+ * @param {boolean} [options.and=false] - Whether to include "and" after hundreds (e.g., "one hundred and twenty").
+ * @param {string} [options.separator=" "] - The string used to separate words in the output.
+ * @returns {string} The English words representation of the number.
+ *
  * @example
- * Basic usage
- * ```ts
- * spell(42)
- * // Returns: "forty two"
- * ```
- * 
+ * spell(123) 
+ * // Returns: "one hundred twenty three"
+ *
  * @example
- * With hyphens
- * ```ts
- * spell(42, true)
- * // Returns: "forty-two"
- * ```
- * 
- * @example
- * With "and" after hundreds
- * ```ts
- * spell(123, false, true)
+ * spell(123, { and: true }) 
  * // Returns: "one hundred and twenty three"
- * ```
- * 
+ *
  * @example
- * Large numbers
- * ```ts
- * spell(1234567)
- * // Returns: "one million two hundred thirty four thousand five hundred sixty seven"
- * ```
- * 
+ * spell(45.67, { hyphens: true }) 
+ * // Returns: "forty-five point six seven"
+ *
  * @example
- * Custom separator
- * ```ts
- * spell(42, false, false, "_")
- * // Returns: "forty_two"
- * ```
- * 
- * @example
- * Zero
- * ```ts
- * spell(0)
- * // Returns: "zero"
- * ```
+ * spell(1001, { separator: "-" }) 
+ * // Returns: "one-thousand-one"
  */
 export function spell(
     n: number,
@@ -127,4 +106,4 @@ export function spell(
     )
 }
 
-console.log(spell(123456789))
+console.log(spell(101, {and: true}))

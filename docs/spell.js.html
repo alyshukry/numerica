@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>spell.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#abbreviate">abbreviate</a></li><li><a href="global.html#convertBase">convertBase</a></li><li><a href="global.html#relativeTime">relativeTime</a></li><li><a href="global.html#separate">separate</a></li><li><a href="global.html#spell">spell</a></li><li><a href="global.html#toFraction">toFraction</a></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">spell.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.spell = spell;
+const ONES = [
+    "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
+];
+const TEENS = [
+    "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+    "sixteen", "seventeen", "eighteen", "nineteen"
+];
+const TENS = [
+    "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"
+];
+const THOUSANDS = [
+    "", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion"
+];
+/**
+ * Converts a number into its English words representation.
+ *
+ * This function handles both integer and decimal parts of the number.
+ * It supports optional formatting for hyphens between tens and ones,
+ * inclusion of "and" in hundreds, and a custom separator between words.
+ *
+ * @param {number} n - The number to convert. Can be an integer or float.
+ * @param {Object} [options] - Optional settings for formatting.
+ * @param {boolean} [options.hyphens=false] - Whether to include hyphens between tens and ones (e.g., "twenty-one").
+ * @param {boolean} [options.and=false] - Whether to include "and" after hundreds (e.g., "one hundred and twenty").
+ * @param {string} [options.separator=" "] - The string used to separate words in the output.
+ * @returns {string} The English words representation of the number.
+ *
+ * @example
+ * spell(123)
+ * // Returns: "one hundred twenty three"
+ *
+ * @example
+ * spell(123, { and: true })
+ * // Returns: "one hundred and twenty three"
+ *
+ * @example
+ * spell(45.67, { hyphens: true })
+ * // Returns: "forty-five point six seven"
+ *
+ * @example
+ * spell(1001, { separator: "-" })
+ * // Returns: "one-thousand-one"
+ */
+function spell(n, { hyphens = false, and = false, separator = " " } = {}) {
+    if (n === 0)
+        return "zero";
+    let string = [];
+    const decimals = n.toString().includes('.') ? [...n.toString().split('.')[1]].map(Number) : [];
+    let i = -1;
+    while (n >= 1) {
+        i++;
+        // Convert chunk into a three digit word
+        let chunk = n % 1000;
+        let wordChunk = "";
+        if (chunk >= 1) {
+            let words = [];
+            if (chunk >= 100) {
+                words.push(ONES[Math.floor(chunk / 100)] + (and ? `${separator}hundred${separator}and` : `${separator}hundred`));
+                chunk %= 100;
+            }
+            if (chunk >= 20) {
+                let tens = TENS[Math.floor(chunk / 10)];
+                let ones = chunk % 10 > 0 ? (hyphens ? "-" : separator) + ONES[Math.floor(chunk % 10)] : "";
+                words.push(tens + ones);
+            }
+            else if (chunk >= 10)
+                words.push(TEENS[chunk - 10]);
+            else if (chunk > 0)
+                words.push(ONES[chunk]);
+            wordChunk = words.join(separator);
+        }
+        wordChunk += i > 0 ? separator + THOUSANDS[i] : THOUSANDS[i];
+        string.push(wordChunk);
+        n = Math.floor(n / 1000);
+    }
+    string = string.reverse();
+    // Handling decimals
+    if (decimals.length > 0) {
+        string.push("point");
+        for (let i = 0; i &lt; decimals.length; i++)
+            string.push(ONES[decimals[i]]);
+    }
+    return (string.join(separator));
+}
+console.log(spell(101, { and: true }));
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.5</a> on Wed Oct 08 2025 19:15:41 GMT+0300 (Eastern European Summer Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>

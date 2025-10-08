@@ -16,6 +16,39 @@ interface Options {
     includeSuffix?: boolean
 }
 
+/**
+ * Converts a date into a human-readable relative time string.
+ *
+ * This function compares a given date to the current time (or a custom reference date)
+ * and expresses the difference in natural language — for example, `"3 days ago"` or `"in 2 hours"`.
+ * It supports multiple levels of detail (e.g., `"1 year, 2 months"`), abbreviations, and optional suffixes.
+ *
+ * @param {Date} date - The target date to compare against the reference date.
+ * @param {Object} [options] - Optional settings to control formatting and precision.
+ * @param {Date} [options.now=new Date()] - The reference date to compare with (defaults to the current time).
+ * @param {number} [options.lod=1] - Level of detail (number of time units to include).  
+ * For example, `2` might produce `"1 year, 2 months"` instead of just `"1 year"`.
+ * @param {string} [options.separator=", "] - String used to separate time units in the output.
+ * @param {boolean} [options.abbreviate=false] - Whether to abbreviate units (e.g., `"1d"` instead of `"1 day"`).
+ * @param {boolean} [options.includeSuffix=true] - Whether to include `"ago"` or `"in"` to indicate direction in time.
+ * @returns {string} A human-readable string representing the relative time.
+ *
+ * @example
+ * relativeTime(new Date(Date.now() - 60000))
+ * // Returns: "1 minute ago"
+ *
+ * @example
+ * relativeTime(new Date(Date.now() + 3600000))
+ * // Returns: "in 1 hour"
+ *
+ * @example
+ * relativeTime(new Date(Date.now() - 90061000), { lod: 2 })
+ * // Returns: "1 day, 1 hour ago"
+ *
+ * @example
+ * relativeTime(new Date(Date.now() - 90061000), { abbreviate: true, includeSuffix: false })
+ * // Returns: "1d, 1h"
+ */
 export function relativeTime(
     date: Date,
     {
