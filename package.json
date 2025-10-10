@@ -11,9 +11,9 @@
         "test": "echo \"Error: no test specified\" && exit 1",
         "compile": "tsc",
         "docs:generate": "typedoc",
-        "release:patch": "npm run compile && npm run docs:generate && echo numerica.js.org > docs/CNAME && npm version patch -m \"v%s - patch release\"",
-        "release:minor": "npm run compile && npm run docs:generate && echo numerica.js.org > docs/CNAME && npm version minor -m \"v%s - minor release\"",
-        "release:major": "npm run compile && npm run docs:generate && echo numerica.js.org > docs/CNAME && npm version major -m \"v%s - major release\"",
+        "release:patch": "npm run compile && npm run docs:generate && echo numerica.js.org > docs/CNAME && git add . && git commit -m \"prep: update source files before release\" && npm version patch -m \"v%s - patch release\"",
+        "release:minor": "npm run compile && npm run docs:generate && echo numerica.js.org > docs/CNAME && git add . && git commit -m \"prep: update source files before release\" && npm version minor -m \"v%s - minor release\"",
+        "release:major": "npm run compile && npm run docs:generate && echo numerica.js.org > docs/CNAME && git add . && git commit -m \"prep: update source files before release\" && npm version major -m \"v%s - major release\"",
         "publish:all": "git push && git push --tags && npm publish"
     },
     "keywords": [
