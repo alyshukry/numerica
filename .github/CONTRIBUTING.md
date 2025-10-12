@@ -1,4 +1,4 @@
-# Contributing
+# Collaborating Guide
 Thanks for considering contributing! All improvements are welcome, big or small.
 ## PRs and Code contributions
 -   Tests must pass.
