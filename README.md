@@ -1,6 +1,6 @@
 ![Project Logo](.github/assets/logo.png)
 
-A utility library for clean and consistent number formatting. Designed to make numeric values more readable.
+A utility library for number formatting and string-to-number parsing.
 
 ## Navigation
 1. [Documentation](https://numerica.js.org)
