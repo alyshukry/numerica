@@ -57,7 +57,7 @@ export function relativeTime(
         separator = ', ',
         abbreviate = false,
         includeSuffix = true,
-    }: Options = {}
+    }: Options = {},
 ): string {
     const time = date.getTime() - now.getTime()
     const timeVal = Math.abs(time)
@@ -84,7 +84,7 @@ export function relativeTime(
                 val +
                 (abbreviate
                     ? u.abb
-                    : ' ' + u.name + (val > 1 ? 's' : ''))
+                    : ' ' + u.name + (val > 1 ? 's' : '')),
             )
 
             // Subtract the rounded value to get remainder

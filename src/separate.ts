@@ -48,7 +48,7 @@ export function separate(
     // Insert separator every `segment` digits
     const grouped = reversed.replace(
         new RegExp(`(\\d{${segment}})(?=\\d)`, 'g'),
-        `$1${char}`
+        `$1${char}`,
     )
 
     // Reverse back and remove any accidental leading separator

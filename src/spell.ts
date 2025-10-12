@@ -6,22 +6,22 @@ interface Options {
 
 const ONES = [
     '', 'one', 'two', 'three', 'four', 'five',
-    'six', 'seven', 'eight', 'nine'
+    'six', 'seven', 'eight', 'nine',
 ]
 const DIGITS = [
     'zero', 'one', 'two', 'three', 'four', 'five',
-    'six', 'seven', 'eight', 'nine'
+    'six', 'seven', 'eight', 'nine',
 ]
 const TEENS = [
     'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
-    'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
+    'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen',
 ]
 const TENS = [
     '', '', 'twenty', 'thirty', 'forty', 'fifty',
-    'sixty', 'seventy', 'eighty', 'ninety'
+    'sixty', 'seventy', 'eighty', 'ninety',
 ]
 const THOUSANDS = [
-    '', 'thousand', 'million', 'billion', 'trillion'
+    '', 'thousand', 'million', 'billion', 'trillion',
 ]
 
 export function spell(
@@ -40,7 +40,7 @@ export function spell(
     let intNum = Math.floor(Math.abs(Number(intStr)))
 
     // Preserve decimals (including leading zeros)
-    const decimals = decStr ? decStr.split('').map(ch => parseInt(ch, 10)) : []
+    const decimals = decStr ? decStr.split('').map((ch) => parseInt(ch, 10)) : []
 
     // Handle integer part
     let i = 0
@@ -88,7 +88,7 @@ function spellChunk(
     num: number,
     hyphens: boolean,
     and: boolean,
-    separator: string
+    separator: string,
 
 ): string {
 
