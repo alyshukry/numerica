@@ -1,22 +1,16 @@
+![Project Logo](.github/assets/logo.png)
 
-  
-![npm](https://img.shields.io/npm/v/numerica) ![license](https://img.shields.io/badge/license-MIT-blue.svg) ![downloads](https://img.shields.io/npm/dt/numerica)
-
-**Numerica** is a lightweight number formatting library for frontend developers. 
-<br>
-Docs: [numerica.js.org](https://numerica.js.org)
-
-### 🚀 Installation:
+A utility library for clean and consistent number formatting.
+Designed to make numeric values more readable across different use cases.
+## Table of contents
+1. [Documentation](https://numerica.js.org)
+2. [Contributing](https://github.com/alyshukry/numerica?tab=contributing-ov-file)
+3. [License](https://github.com/alyshukry/numerica?tab=MIT-1-ov-file)
+### Installation:
 Javascript:
 ```bash
 npm  install  numerica
 ```
 ```js
-import … from "numerica"
+import … from  "numerica"
 ```
-<br>
-
-**License:** MIT
-<br>
-
-**Contributing:** Contributions welcome! Please feel free to submit a Pull Request.
