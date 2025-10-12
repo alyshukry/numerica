@@ -37,8 +37,9 @@ export function separate(
     {
         char = ',',
         segment = 3,
-    }: { char?: string; segment?: number } = {}
-): string {
+
+    }: Options = {}): string {
+
     const parts = n.toString().split('.')
 
     // Reverse integer part

@@ -1,53 +1,29 @@
-const ONES = [
-    'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
-]
-const TEENS = [
-    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
-    'sixteen', 'seventeen', 'eighteen', 'nineteen',
-]
-const TENS = [
-    '', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety',
-]
-const THOUSANDS = [
-    '', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion',
-]
-
 interface Options {
-    hyphens?: boolean,
-    and?: boolean,
+    hyphens?: boolean
+    and?: boolean
     separator?: string
 }
 
-/**
- * Converts a number into its English words representation.
- *
- * This function handles both integer and decimal parts of the number.
- * It supports optional formatting for hyphens between tens and ones, 
- * inclusion of "and" in hundreds, and a custom separator between words.
- *
- * @param {number} n - The number to convert. Can be an integer or float.
- * @param {Object} [options] - Optional settings for formatting.
- * @param {boolean} [options.hyphens=false] - Whether to include hyphens between tens and ones (e.g., "twenty-one").
- * @param {boolean} [options.and=false] - Whether to include "and" after hundreds (e.g., "one hundred and twenty").
- * @param {string} [options.separator=" "] - The string used to separate words in the output.
- * @returns {string} The English words representation of the number.
- *
- * @example
- * spell(123) 
- * // Returns: "one hundred twenty three"
- *
- * @example
- * spell(123, { and: true }) 
- * // Returns: "one hundred and twenty three"
- *
- * @example
- * spell(45.67, { hyphens: true }) 
- * // Returns: "forty-five point six seven"
- *
- * @example
- * spell(1001, { separator: "-" }) 
- * // Returns: "one-thousand-one"
- */
+const ONES = [
+    '', 'one', 'two', 'three', 'four', 'five',
+    'six', 'seven', 'eight', 'nine'
+]
+const DIGITS = [
+    'zero', 'one', 'two', 'three', 'four', 'five',
+    'six', 'seven', 'eight', 'nine'
+]
+const TEENS = [
+    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen',
+    'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen'
+]
+const TENS = [
+    '', '', 'twenty', 'thirty', 'forty', 'fifty',
+    'sixty', 'seventy', 'eighty', 'ninety'
+]
+const THOUSANDS = [
+    '', 'thousand', 'million', 'billion', 'trillion'
+]
+
 export function spell(
     n: number,
     {
@@ -58,52 +34,83 @@ export function spell(
     }: Options = {}): string {
 
     if (n === 0) return 'zero'
-    let string: string[] = []
 
-    const decimals: number[] = n.toString().includes('.') ? [...n.toString().split('.')[1]].map(Number) : []
+    const parts: string[] = []
+    const [intStr, decStr] = n.toString().split('.')
+    let intNum = Math.floor(Math.abs(Number(intStr)))
 
-    let i = -1
-    while (n >= 1) {
-        i++
+    // Preserve decimals (including leading zeros)
+    const decimals = decStr ? decStr.split('').map(ch => parseInt(ch, 10)) : []
 
-        // Convert chunk into a three digit word
-        let chunk = n % 1000
-        let wordChunk: string = ''
-        if (chunk >= 1) {
-            const words: string[] = []
-
-            if (chunk >= 100) {
-                words.push(ONES[Math.floor(chunk / 100)] + (and ? `${separator}hundred${separator}and` : `${separator}hundred`))
-                chunk %= 100
-            }
-            if (chunk >= 20) {
-                const tens = TENS[Math.floor(chunk / 10)]
-                const ones = chunk % 10 > 0 ? (hyphens ? '-' : separator) + ONES[Math.floor(chunk % 10)] : ''
-                words.push(tens + ones)
-            }
-            else if (chunk >= 10) words.push(TEENS[chunk - 10])
-            else if (chunk > 0) words.push(ONES[chunk])
-
-            wordChunk = words.join(separator)
+    // Handle integer part
+    let i = 0
+    while (intNum > 0) {
+        const chunk = intNum % 1000
+        if (chunk > 0) {
+            const chunkWords = spellChunk(chunk, hyphens, and, separator)
+            const suffix = THOUSANDS[i] ? separator + THOUSANDS[i] : ''
+            parts.unshift(chunkWords + suffix)
         }
-        wordChunk += i > 0 ? separator + THOUSANDS[i] : THOUSANDS[i]
-
-        string.push(wordChunk)
-
-        n = Math.floor(n / 1000)
+        intNum = Math.floor(intNum / 1000)
+        i++
     }
 
-    string = string.reverse()
+    // If there was no integer part (e.g., 0.123) we still want "zero point ..."
+    if (parts.length === 0 && decimals.length > 0) parts.push('zero')
 
-    // Handling decimals
     if (decimals.length > 0) {
-        string.push('point')
-        for (let i = 0; i < decimals.length; i++) string.push(ONES[decimals[i]])
+        parts.push('point')
+        for (const d of decimals) {
+            // use DIGITS not ONES
+            parts.push(DIGITS[d])
+        }
     }
 
-    return (
-        string.join(separator)
-    )
+    // Add "and" between thousands and last < 100 chunk
+    if (and && decimals.length === 0) {
+        // Find last numeric chunk
+        const lastIdx = parts.length - 1
+        if (lastIdx >= 0) {
+            // Detect the numerical value of last 3 digits by parsing original number
+            const lastThree = Math.abs(Math.floor(Number(n)) % 1000)
+            if (lastThree > 0 && lastThree < 100) {
+                // Replace last part with "and <last part>"
+                parts[lastIdx] = 'and' + separator + parts[lastIdx]
+            }
+        }
+    }
+
+    return parts.join(separator).replace(/\s+/g, ' ').trim()
 }
 
-console.log(spell(101, { and: true }))
+// Converts a 3-digit chunk into words
+function spellChunk(
+    num: number,
+    hyphens: boolean,
+    and: boolean,
+    separator: string
+
+): string {
+
+    const words: string[] = []
+    const hundred = Math.floor(num / 100)
+    const remainder = num % 100
+
+    if (hundred > 0) {
+        words.push(ONES[hundred] + separator + 'hundred')
+        if (and && remainder > 0) words.push('and')
+    }
+
+    if (remainder >= 20) {
+        const tens = Math.floor(remainder / 10)
+        const ones = remainder % 10
+        const joiner = ones > 0 ? (hyphens ? '-' : separator) : ''
+        words.push(TENS[tens] + (ones > 0 ? joiner + ONES[ones] : ''))
+    } else if (remainder >= 10) {
+        words.push(TEENS[remainder - 10])
+    } else if (remainder > 0) {
+        words.push(ONES[remainder])
+    }
+
+    return words.join(separator)
+}

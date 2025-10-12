@@ -47,7 +47,7 @@ export function toFraction(
 
     const str = String(n)
     if (!str.includes('.')) {
-        // no decimal part
+        // No decimal part
         return `${n}/1`
     }
 

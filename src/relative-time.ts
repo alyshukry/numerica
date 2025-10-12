@@ -57,36 +57,43 @@ export function relativeTime(
         separator = ', ',
         abbreviate = false,
         includeSuffix = true,
-
-    }: Options = {}): string {
-
+    }: Options = {}
+): string {
     const time = date.getTime() - now.getTime()
     const timeVal = Math.abs(time)
 
-    if (timeVal <= 1000) return 'just now'
+    if (timeVal <= 1500) return 'just now'
 
     const words: string[] = []
     let t = timeVal
     let unitsUsed = 0
-    for (const u of UNITS) {
+
+    for (const [i, u] of UNITS.entries()) {
         if (unitsUsed >= lod) break
 
-        if (t >= u.ms) {
+        const rawVal = t / u.ms
+        
+        // Round to nearest integer
+        const val = Math.round(rawVal)
+
+        // Only use this unit if we have at least 0.5 of it (which rounds to 1)
+        if (val >= 1) {
             unitsUsed++
-            const val = Math.floor(t / u.ms)
 
             words.push(
-                val + (
-                    abbreviate
-                        ? u.abb
-                        : ' ' + u.name + (val > 1 ? 's' : '')
-                ),
+                val +
+                (abbreviate
+                    ? u.abb
+                    : ' ' + u.name + (val > 1 ? 's' : ''))
             )
-            t -= val * u.ms
+
+            // Subtract the rounded value to get remainder
+            t = Math.abs(t - val * u.ms)
         }
     }
 
     let string = words.join(separator)
+
     if (includeSuffix) {
         if (time < 0) {
             string += ' ago'
@@ -97,3 +104,5 @@ export function relativeTime(
 
     return string
 }
+
+console.log(relativeTime(new Date(Date.now()), {}))

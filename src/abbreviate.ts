@@ -33,6 +33,7 @@ export function abbreviate(
     n: number,
     {
         d = 1,
+        
     }: Options = {}): string {
 
     const suffixes = [
