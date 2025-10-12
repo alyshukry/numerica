@@ -40,8 +40,8 @@ export function toFraction(
     {
         mixed = false,
         pretty = false,
-        symbol = pretty ? "⁄" : "/",
-        space = " "
+        symbol = pretty ? '⁄' : '/',
+        space = ' ',
 
     }: Options = {}): string {
 
@@ -69,16 +69,17 @@ export function toFraction(
 
     return mixed
         ? (
-            (n > 1 ? "" : "-") +
-            (numerator > denominator ? Math.floor(numerator / denominator) + space : "") +
+            (n > 0 ? '' : '-') +
+            (numerator > denominator ? Math.floor(numerator / denominator) + space : '') +
             ((numerator % denominator) / gcf) +
             (symbol) +
             (denominator / gcf)
         )
         : (
+            (n > 0 ? '' : '-') +
             (numerator / gcf) +
             (symbol) +
             (denominator / gcf)
-        );
+        )
 
 }

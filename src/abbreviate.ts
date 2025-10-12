@@ -10,7 +10,7 @@ interface Options {
  *
  * @param {number} n - The number to abbreviate.
  * @param {Object} [options] - Optional formatting settings.
- * @param {number} [options.d=1] - Number of decimal places to include in the abbreviated output.
+ * @param {number} [options.d=1] - Number of decimal places to include in the abbreviated output. (Trailing zeros are removed)
  * @returns {string} A compact, human-readable representation of the number.
  *
  * @example
@@ -19,7 +19,7 @@ interface Options {
  *
  * @example
  * abbreviate(2500000, { d: 2 })
- * // Returns: "2.50m"
+ * // Returns: "2.5m" (trailing zeros are removed)
  *
  * @example
  * abbreviate(987654321)
@@ -32,23 +32,40 @@ interface Options {
 export function abbreviate(
     n: number,
     {
-        d = 1
-
+        d = 1,
     }: Options = {}): string {
-        
-    // Get the number of digits
-    const digits = n.toString().length
-    // Get how many 000's are before the first number
-    const suffixIndex = Math.floor((digits - 1) / 3)
-    // Get the multiple of the suffix
-    const number = (n / (1000 ** (suffixIndex))).toFixed(d)
 
     const suffixes = [
-        "", "k", "m", "b", "t", // Reliable suffixes
-        "qa", "qi", "sx", "sp", "oc", "no", "dc"
+        '', 'k', 'm', 'b', 't', // Reliable suffixes
+        'qa', 'qi',
     ]
 
-    const string = number + suffixes[suffixIndex]
+    // Handle invalid numbers
+    if (!isFinite(n) || Number.isNaN(n)) {
+        return String(n)
+    }
 
-    return string
+    const sign = n < 0 ? '-' : ''
+    const abs = Math.abs(n)
+
+    // If number is small, don't abbreviate but still respect the 'd' chosen
+    if (abs < 1000) {
+        // If integer, return without decimals
+        if (Number.isInteger(abs)) {
+            return sign + String(abs)
+        }
+        // Else, format to 'd' decimals then remove trailing zeros
+        return sign + (d === 0 ? String(Math.round(abs)) : abs.toFixed(d)).replace(/\.?0+$/, '')
+    }
+
+    // Get the amount of '000's in the number
+    const index = Math.min(Math.floor(Math.log10(abs) / 3), suffixes.length - 1) // Using log10() gets how many digits before first one. Also make sure to not exceed the arrays length
+
+    const value = abs / (1000 ** index)
+    // Format with 'd' decimals, then trim trailing zeros
+    const string = (d === 0 ? String(Math.round(value)) : value.toFixed(d)).replace(/\.?0+$/, '')
+
+    return sign + string + suffixes[index]
 }
+
+console.log(abbreviate(1234))

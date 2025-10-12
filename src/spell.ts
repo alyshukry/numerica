@@ -1,15 +1,15 @@
 const ONES = [
-    "zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"
+    'zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine',
 ]
 const TEENS = [
-    "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
-    "sixteen", "seventeen", "eighteen", "nineteen"
+    'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen',
+    'sixteen', 'seventeen', 'eighteen', 'nineteen',
 ]
 const TENS = [
-    "", "", "twenty", "thirty", "forty", "fifty", "sixty", "seventy", "eighty", "ninety"
+    '', '', 'twenty', 'thirty', 'forty', 'fifty', 'sixty', 'seventy', 'eighty', 'ninety',
 ]
 const THOUSANDS = [
-    "", "thousand", "million", "billion", "trillion", "quadrillion", "quintillion"
+    '', 'thousand', 'million', 'billion', 'trillion', 'quadrillion', 'quintillion',
 ]
 
 interface Options {
@@ -53,11 +53,11 @@ export function spell(
     {
         hyphens = false,
         and = false,
-        separator = " "
+        separator = ' ',
 
     }: Options = {}): string {
 
-    if (n === 0) return "zero"
+    if (n === 0) return 'zero'
     let string: string[] = []
 
     const decimals: number[] = n.toString().includes('.') ? [...n.toString().split('.')[1]].map(Number) : []
@@ -68,17 +68,17 @@ export function spell(
 
         // Convert chunk into a three digit word
         let chunk = n % 1000
-        let wordChunk: string = ""
+        let wordChunk: string = ''
         if (chunk >= 1) {
-            let words: string[] = []
+            const words: string[] = []
 
             if (chunk >= 100) {
                 words.push(ONES[Math.floor(chunk / 100)] + (and ? `${separator}hundred${separator}and` : `${separator}hundred`))
                 chunk %= 100
             }
             if (chunk >= 20) {
-                let tens = TENS[Math.floor(chunk / 10)]
-                let ones = chunk % 10 > 0 ? (hyphens ? "-" : separator) + ONES[Math.floor(chunk % 10)] : ""
+                const tens = TENS[Math.floor(chunk / 10)]
+                const ones = chunk % 10 > 0 ? (hyphens ? '-' : separator) + ONES[Math.floor(chunk % 10)] : ''
                 words.push(tens + ones)
             }
             else if (chunk >= 10) words.push(TEENS[chunk - 10])
@@ -97,7 +97,7 @@ export function spell(
 
     // Handling decimals
     if (decimals.length > 0) {
-        string.push("point")
+        string.push('point')
         for (let i = 0; i < decimals.length; i++) string.push(ONES[decimals[i]])
     }
 
@@ -106,4 +106,4 @@ export function spell(
     )
 }
 
-console.log(spell(101, {and: true}))
+console.log(spell(101, { and: true }))

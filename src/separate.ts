@@ -35,13 +35,28 @@ interface Options {
 export function separate(
     n: number,
     {
-        char = ",", 
-        segment = 3
+        char = ',',
+        segment = 3,
+    }: { char?: string; segment?: number } = {}
+): string {
+    const parts = n.toString().split('.')
 
-    }: Options = {}): string {
-        
-    const parts = n.toString().split(".")
-    const regex = new RegExp(`\\B(?=(\\d{${segment}})+(?!\\d))`, "g")
-    parts[0] = parts[0].replace(regex, char)
-    return parts.join(".")
+    // Reverse integer part
+    const reversed = parts[0].split('').reverse().join('')
+
+    // Insert separator every `segment` digits
+    const grouped = reversed.replace(
+        new RegExp(`(\\d{${segment}})(?=\\d)`, 'g'),
+        `$1${char}`
+    )
+
+    // Reverse back and remove any accidental leading separator
+    const escaped_char = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    parts[0] = grouped
+        .split('')
+        .reverse()
+        .join('')
+        .replace(new RegExp(`^${escaped_char}`), '')
+
+    return parts.join('.')
 }

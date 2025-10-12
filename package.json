@@ -8,8 +8,9 @@
         "dist"
     ],
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
+        "test": "vitest run",
         "compile": "tsc",
+        "lint": "eslint src --fix --max-warnings=0 && echo No linting issues found.",
         "docs:generate": "typedoc",
         "docs:publish": "npm run docs:generate && echo numerica.js.org > docs/CNAME && git add docs && git diff --cached --quiet || (git commit -m \"docs: update documentation\" && git push)",
         "release:patch": "npm run compile && npm run docs:generate && echo numerica.js.org > docs/CNAME && git add . && git commit -m \"prep: commit files before release\" && npm version patch -m \"v%s - patch release\"",
@@ -32,10 +33,17 @@
     "author": "Aly Shukry <alyshukry.dev@gmail.com> (https://alyshukry.works)",
     "license": "MIT",
     "devDependencies": {
+        "@eslint/js": "^9.37.0",
+        "@eslint/json": "^0.13.2",
         "docdash": "^2.0.2",
         "documentation": "^14.0.3",
+        "eslint": "^9.37.0",
+        "globals": "^16.4.0",
+        "jiti": "^2.6.1",
         "jsdoc": "^4.0.5",
         "typedoc": "^0.28.13",
-        "typedoc-github-theme": "^0.3.1"
+        "typedoc-github-theme": "^0.3.1",
+        "typescript-eslint": "^8.46.0",
+        "vitest": "^3.2.4"
     }
 }

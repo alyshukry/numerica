@@ -28,11 +28,13 @@
  * // Returns: "2S"
  */
 export function convertBase(n: number | string, to: number, from: number = 10): string {
-    const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
     if (to > chars.length || from > chars.length) throw new Error(`Largest base supported is ${chars.length}.`)
 
-    const digits = n.toString().split('')
+    const isNegative = n.toString().startsWith('-') // Check if the user input a negative number
+    const digits = n.toString().replace(/^-/, '').split('') // Turn the number into an array of chars and remove the negative dash
+
 
     // Validate digits
     for (const d of digits) {
@@ -49,7 +51,7 @@ export function convertBase(n: number | string, to: number, from: number = 10): 
 
     // Convert base 10 to target base
     let dividend = b10
-    let result: string[] = []
+    const result: string[] = []
 
     // Get remainders
     while (dividend > 0) {
@@ -58,5 +60,7 @@ export function convertBase(n: number | string, to: number, from: number = 10): 
         dividend = Math.floor(dividend / to)
     }
 
-    return result.join('') || "0"
+    if (isNegative) result.unshift('-')
+
+    return result.join('') || '0'
 }
