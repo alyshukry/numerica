@@ -14,18 +14,17 @@ assignees: ''
 - Discuss how to best fix the bug
 - Work towards a fix
 -->
-
-## Environment information
-
 **Version**:
 <!-- 
 To find the installed version of a package, you can check the `package.json` file in the root directory of your project. The version will be listed under `dependencies` or `devDependencies`, like this:
-
 ```json
 "dependencies": {
   "numerica": "0.12.3"
 }
+```
 -->
+
+**Bug description:**
 
 **Any other relevant information**:
 
