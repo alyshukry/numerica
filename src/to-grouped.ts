@@ -17,22 +17,22 @@ interface Options {
  * @returns {string} The formatted number string with separators applied.
  *
  * @example
- * separate(1234567)
+ * toGrouped(1234567)
  * // Returns: "1,234,567"
  *
  * @example
- * separate(1234567.89)
+ * toGrouped(1234567.89)
  * // Returns: "1,234,567.89"
  *
  * @example
- * separate(987654321, { char: " ", segment: 3 })
+ * toGrouped(987654321, { char: " ", segment: 3 })
  * // Returns: "987 654 321"
  *
  * @example
- * separate(123456, { segment: 2, char: "_" })
+ * toGrouped(123456, { segment: 2, char: "_" })
  * // Returns: "1_23_45_6"
  */
-export function separate(
+export function toGrouped(
     n: number,
     {
         char = ',',

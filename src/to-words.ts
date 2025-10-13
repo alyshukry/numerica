@@ -24,7 +24,7 @@ const THOUSANDS = [
     '', 'thousand', 'million', 'billion', 'trillion',
 ]
 
-export function spell(
+export function toWords(
     n: number,
     {
         hyphens = false,

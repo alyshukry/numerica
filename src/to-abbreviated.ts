@@ -14,22 +14,22 @@ interface Options {
  * @returns {string} A compact, human-readable representation of the number.
  *
  * @example
- * abbreviate(1500)
+ * toAbbreviated(1500)
  * // Returns: "1.5k"
  *
  * @example
- * abbreviate(2500000, { d: 2 })
+ * toAbbreviated(2500000, { d: 2 })
  * // Returns: "2.5m" (trailing zeros are removed)
  *
  * @example
- * abbreviate(987654321)
+ * toAbbreviated(987654321)
  * // Returns: "987.7m"
  *
  * @example
- * abbreviate(1000000000000)
+ * toAbbreviated(1000000000000)
  * // Returns: "1t"
  */
-export function abbreviate(
+export function toAbbreviated(
     n: number,
     {
         d = 1,
@@ -68,5 +68,3 @@ export function abbreviate(
 
     return sign + string + suffixes[index]
 }
-
-console.log(abbreviate(1234))

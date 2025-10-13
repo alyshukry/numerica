@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { convertBase } from "../src/convert-base"
+import { toBase } from "../src/to-base"
 
 // Basic conversions (strings & numbers)
 describe.each([
@@ -17,10 +17,10 @@ describe.each([
     ["Z", 10, 36, "35"],
     // base62 -> decimal (lowercase z is index 61)
     ["z", 10, 62, "61"]
-])("convertBase() — basic conversions — convert %o to base %i from %o", (n, to, from, expected) => {
+])("toBase() — basic conversions — convert %o to base %i from %o", (n, to, from, expected) => {
     it(`should convert ${JSON.stringify(n)} to "${expected}"`, () => {
-        if (from === undefined) expect(convertBase(n as any, to)).toBe(expected)
-        else expect(convertBase(n as any, to, from as number)).toBe(expected)
+        if (from === undefined) expect(toBase(n as any, to)).toBe(expected)
+        else expect(toBase(n as any, to, from as number)).toBe(expected)
     })
 })
 
@@ -30,10 +30,10 @@ describe.each([
     ["000", 10, 10, "0"], // leading zero input should collapse to "0"
     ["123", 10, 10, "123"], // same base -> same representation
     [0, 2, undefined, "0"], // numeric zero
-])("convertBase() — zero / leading zeros / identity", (n, to, from, expected) => {
+])("toBase() — zero / leading zeros / identity", (n, to, from, expected) => {
     it(`should convert ${JSON.stringify(n)} to "${expected}"`, () => {
-        if (from === undefined) expect(convertBase(n as any, to)).toBe(expected)
-        else expect(convertBase(n as any, to, from as number)).toBe(expected)
+        if (from === undefined) expect(toBase(n as any, to)).toBe(expected)
+        else expect(toBase(n as any, to, from as number)).toBe(expected)
     })
 })
 
@@ -42,10 +42,10 @@ describe.each([
     ["-10", 2, 10, "-1010"],
     [-13, 2, undefined, "-1101"],
     ["-FF", 10, 16, "-255"]
-])("convertBase() — negative numbers", (n, to, from, expected) => {
+])("toBase() — negative numbers", (n, to, from, expected) => {
     it(`should convert negative ${JSON.stringify(n)} to "${expected}"`, () => {
-        if (from === undefined) expect(convertBase(n as any, to)).toBe(expected)
-        else expect(convertBase(n as any, to, from as number)).toBe(expected)
+        if (from === undefined) expect(toBase(n as any, to)).toBe(expected)
+        else expect(toBase(n as any, to, from as number)).toBe(expected)
     })
 })
 
@@ -57,12 +57,12 @@ describe.each([
     // lowercase in base62 is valid
     ["a", 10, 62, "36"], // 'a' index is 36 -> decimal 36
     ["A", 10, 36, "10"] // 'A' index 10 -> decimal 10 (still valid in base36)
-])("convertBase() — case sensitivity", (n, to, from, expected) => {
+])("toBase() — case sensitivity", (n, to, from, expected) => {
     it(`should handle case for ${JSON.stringify(n)} from base ${from} to ${to}`, () => {
         if (expected === "InvalidChar") {
-            expect(() => convertBase(n as any, to, from as number)).toThrow()
+            expect(() => toBase(n as any, to, from as number)).toThrow()
         } else {
-            expect(convertBase(n as any, to, from as number)).toBe(expected)
+            expect(toBase(n as any, to, from as number)).toBe(expected)
         }
     })
 })
@@ -75,9 +75,9 @@ describe.each([
     ["A", 10, 10, /Digit 'A' not valid in base 10\./],
     // Lowercase 'z' has an index but is invalid in base 36 (idx >= 36)
     ["z", 10, 36, /Digit 'z' not valid in base 36\./]
-])("convertBase() — invalid input cases", (n, to, from, expectedRegex) => {
+])("toBase() — invalid input cases", (n, to, from, expectedRegex) => {
     it(`should throw for ${JSON.stringify(n)} from base ${from}`, () => {
-        expect(() => convertBase(n as any, to, from as number)).toThrow(expectedRegex)
+        expect(() => toBase(n as any, to, from as number)).toThrow(expectedRegex)
     })
 })
 
@@ -89,13 +89,13 @@ describe.each([
     ["10", 10, 63, /Largest base supported is 62\./],
     // exactly 62 should be allowed (e.g., single digit highest)
     ["z", 10, 62, null]
-])("convertBase() — base bounds", (n, to, from, expectedRegexOrNull) => {
+])("toBase() — base bounds", (n, to, from, expectedRegexOrNull) => {
     it(`should validate supported base limits for to=${to} from=${from}`, () => {
         if (expectedRegexOrNull) {
-            expect(() => convertBase(n as any, to, from as number)).toThrow(expectedRegexOrNull)
+            expect(() => toBase(n as any, to, from as number)).toThrow(expectedRegexOrNull)
         } else {
             // allowed: ensure it doesn't throw and returns expected decimal for "z" -> 61
-            expect(convertBase(n as any, to, from as number)).toBe("61")
+            expect(toBase(n as any, to, from as number)).toBe("61")
         }
     })
 })
@@ -111,8 +111,8 @@ describe.each([
     // back and forth: decimal -> base16 -> back to decimal
     ["123456789", 16, 10, "75BCD15"],
     ["75BCD15", 10, 16, "123456789"]
-])("convertBase() — larger samples / roundtrips", (n, to, from, expected) => {
+])("toBase() — larger samples / roundtrips", (n, to, from, expected) => {
     it(`should convert ${JSON.stringify(n)} (from=${from}) to "${expected}" (to=${to})`, () => {
-        expect(convertBase(n as any, to, from as number)).toBe(expected)
+        expect(toBase(n as any, to, from as number)).toBe(expected)
     })
 })
