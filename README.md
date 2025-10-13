@@ -1,6 +1,6 @@
 ![Project Logo](.github/assets/logo.png)
 
-A utility library for number formatting and string-to-number parsing.
+A utility library for number formatting.<br>String-to-number parsing coming soon.
 
 ## Navigation
 1. [Documentation](https://numerica.js.org)
