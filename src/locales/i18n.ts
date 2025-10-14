@@ -1,15 +1,19 @@
-import en from "./en.json"
-
-const locales: Record<string, any> = { en, }
+import en from './en.json'
 
 export type Locale = typeof en
-export let locale = en
+type LocaleKey = 'en' // Add more as needed: 'en' | 'es' | 'fr'
+
+const locales: Record<LocaleKey, Locale> = { en }
+let currentLocale: Locale = en
 
 export function setLocale(loc: string) {
-    if (locales[loc]) locale = locales[loc]
-    else throw new Error(`Locale '${loc}' not found.`)
+    if (loc in locales) {
+        currentLocale = locales[loc as LocaleKey]
+    } else {
+        throw new Error(`Locale '${loc}' not found.`)
+    }
 }
 
 export function getLocale(): Locale {
-    return locale
+    return currentLocale
 }
