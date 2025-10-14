@@ -57,8 +57,9 @@ export function toRelativeTime(
         separator = ', ',
         abbreviate = false,
         includeSuffix = true,
-    }: Options = {},
-): string {
+
+    }: Options = {}): string {
+
     const time = date.getTime() - now.getTime()
     const timeVal = Math.abs(time)
 
@@ -68,7 +69,7 @@ export function toRelativeTime(
     let t = timeVal
     let unitsUsed = 0
 
-    for (const [i, u] of UNITS.entries()) {
+    for (const [, u] of UNITS.entries()) {
         if (unitsUsed >= lod) break
 
         const rawVal = t / u.ms
