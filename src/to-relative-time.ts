@@ -34,22 +34,22 @@ interface Options {
  * @returns {string} A human-readable string representing the relative time.
  *
  * @example
- * relativeTime(new Date(Date.now() - 60000))
+ * toRelativeTime(new Date(Date.now() - 60000))
  * // Returns: "1 minute ago"
  *
  * @example
- * relativeTime(new Date(Date.now() + 3600000))
+ * toRelativeTime(new Date(Date.now() + 3600000))
  * // Returns: "in 1 hour"
  *
  * @example
- * relativeTime(new Date(Date.now() - 90061000), { lod: 2 })
+ * toRelativeTime(new Date(Date.now() - 90061000), { lod: 2 })
  * // Returns: "1 day, 1 hour ago"
  *
  * @example
- * relativeTime(new Date(Date.now() - 90061000), { abbreviate: true, includeSuffix: false })
+ * toRelativeTime(new Date(Date.now() - 90061000), { abbreviate: true, includeSuffix: false })
  * // Returns: "1d, 1h"
  */
-export function relativeTime(
+export function toRelativeTime(
     date: Date,
     {
         now = new Date(),
@@ -105,4 +105,4 @@ export function relativeTime(
     return string
 }
 
-console.log(relativeTime(new Date(Date.now()), {}))
+console.log(toRelativeTime(new Date(Date.now()), {}))

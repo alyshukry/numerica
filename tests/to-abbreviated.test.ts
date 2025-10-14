@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { abbreviate } from "../src/abbreviate"
+import { toAbbreviated } from "../src/to-abbreviated"
 
 // Default options
 describe.each([
@@ -16,9 +16,9 @@ describe.each([
     [0.5, "0.5"],
     [12.34, "12.3"],
     [999.9, "999.9"]
-])("abbreviate() — default options", (x, expected) => {
+])("toAbbreviated() — default options", (x, expected) => {
     it(`should abbreviate ${x} to ${expected}`, () => {
-        expect(abbreviate(x)).toBe(expected)
+        expect(toAbbreviated(x)).toBe(expected)
     })
 })
 
@@ -30,9 +30,9 @@ describe.each([
     [1234567890, { d: 2 }, "1.23b"],
     [999.9, { d: 3 }, "999.9"],
     [0.1234, { d: 2 }, "0.12"]
-])("abbreviate() — with custom options", (x, options, expected) => {
+])("toAbbreviated() — with custom options", (x, options, expected) => {
     it(`should abbreviate ${x} to ${expected} with options ${JSON.stringify(options)}`, () => {
-        expect(abbreviate(x, options)).toBe(expected)
+        expect(toAbbreviated(x, options)).toBe(expected)
     })
 })
 
@@ -41,9 +41,9 @@ describe.each([
     [-1000, "-1k"],
     [-1500000, "-1.5m"],
     [-987654321, "-987.7m"]
-])("abbreviate() — negative numbers", (x, expected) => {
+])("toAbbreviated() — negative numbers", (x, expected) => {
     it(`should abbreviate ${x} to ${expected}`, () => {
-        expect(abbreviate(x)).toBe(expected)
+        expect(toAbbreviated(x)).toBe(expected)
     })
 })
 
@@ -53,8 +53,8 @@ describe.each([
     [1e18, "1qi"],
     [1e21, "1000qi"],
     [1.23e18, "1.2qi"]
-])("abbreviate() — large numbers", (x, expected) => {
+])("toAbbreviated() — large numbers", (x, expected) => {
     it(`should abbreviate ${x} to ${expected}`, () => {
-        expect(abbreviate(x)).toBe(expected)
+        expect(toAbbreviated(x)).toBe(expected)
     })
 })

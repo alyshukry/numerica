@@ -12,22 +12,22 @@
  * @throws {Error} Throws an error if the base exceeds 62 or if the number contains invalid digits.
  *
  * @example
- * convertBase("1010", 10, 2)
+ * toBase("1010", 10, 2)
  * // Returns: "10"
  *
  * @example
- * convertBase(255, 16)
+ * toBase(255, 16)
  * // Returns: "FF"
  *
  * @example
- * convertBase("FF", 10, 16)
+ * toBase("FF", 10, 16)
  * // Returns: "255"
  *
  * @example
- * convertBase("100", 36, 10)
+ * toBase("100", 36, 10)
  * // Returns: "2S"
  */
-export function convertBase(n: number | string, to: number, from: number = 10): string {
+export function toBase(n: number | string, to: number, from: number = 10): string {
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
     if (to > chars.length || from > chars.length) throw new Error(`Largest base supported is ${chars.length}.`)
