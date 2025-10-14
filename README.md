@@ -16,26 +16,26 @@ import … from  "numerica"
 ```
 ## Examples
 ```js
-abbreviate(12345, { d: 1 }) // Returns "12.3k"
-abbreviate(1000000) // Returns "1m"
+toAbbreviated(12345, { d: 1 }) // Returns "12.3k"
+toAbbreviated(1000000) // Returns "1m"
 ```
 ```js
-spell(12345, { and: true, hyphen: true }) // Returns "twelve thousand three hundred and forty-five"
-spell(54321, { space: "_" }) // Returns "fifty four thousand three hundred twenty one"
+toWords(12345, { and: true, hyphen: true }) // Returns "twelve thousand three hundred and forty-five"
+toWords(54321, { space: "_" }) // Returns "fifty four thousand three hundred twenty one"
 ```
 ```js
-relativeTime(new Date(Date.now() - (DAY + HOUR + MINUTE)), { lod: 3, separator: ' • ' }) // Returns "1 day • 1 hour • 1 minute ago"
-relativeTime(new Date(Date.now() - 1000)) // Returns "just now"
+toRelativeTime(new Date(Date.now() - (DAY + HOUR + MINUTE)), { lod: 3, separator: ' • ' }) // Returns "1 day • 1 hour • 1 minute ago"
+toRelativeTime(new Date(Date.now() - 1000)) // Returns "just now"
 ```
 ```js
-separate(12345, { segment: 3, char: "." }) // Returns "12.345"
-separate(0100100001101001, { segment: 8, char: " " }) // Returns "01001000 01101001"
+toGrouped(12345, { segment: 3, char: "." }) // Returns "12.345"
+toGrouped(0100100001101001, { segment: 8, char: " " }) // Returns "01001000 01101001"
 ```
 ```js
 toFraction(2.5, { mixed: true, pretty: true }) // Returns "2 1⁄2"
 toFraction(2.5, { symbol: "|" }) // Returns "5|2"
 ```
 ```js
-convertBase("HELLO", 36, 10) // Returns "1495338607"
-convertBase(123, 10, 2) // Returns "1111011"
+toBase("HELLO", 36, 10) // Returns "1495338607"
+toBase(123, 10, 2) // Returns "1111011"
 ```
