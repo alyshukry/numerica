@@ -1,5 +1,6 @@
 export * from './to-abbreviated'
 export * from './to-base'
+export * from './to-fraction'
 export * from './to-relative-time'
 export * from './to-grouped'
 export * from './to-words'
