@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <rect x="25" y="20" width="75" height="75" rx="0" ry="0" fill="white"/>
+  <text x="32" y="75" fill="black" font-family="monospace" font-size="60" font-weight="900">n,</text>
+  <text x="135" y="75" fill="white" font-family="monospace" font-size="60" font-weight="900">numerica</text>
+</svg>
