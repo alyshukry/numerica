@@ -8,6 +8,7 @@
 <h2 align="center">
     A utility library for number formatting.<br>String-to-number parsing coming soon.
 </h2>
+<br>
 
 ## Navigation
 1. [Documentation](https://numerica.js.org)
