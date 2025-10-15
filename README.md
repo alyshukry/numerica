@@ -5,9 +5,9 @@
         <img alt="numerica logo" src=".github/assets//logo-light.svg">
     </picture>
 </p>
-<p align="center">
+<h2 align="center">
     A utility library for number formatting.<br>String-to-number parsing coming soon.
-</p>
+</h2>
 
 ## Navigation
 1. [Documentation](https://numerica.js.org)
