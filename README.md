@@ -1,4 +1,4 @@
-<p align="center" width="80%">
+<p align="center">
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.svg">
         <source media="(prefers-color-scheme: light)" srcset=".github/assets/logo-light.svg">
