@@ -2,7 +2,7 @@
     <picture>
         <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.svg">
         <source media="(prefers-color-scheme: light)" srcset=".github/assets/logo-light.svg">
-        <img alt="numerica logo" src="assets/logo-light.svg">
+        <img alt="numerica logo" src=".github/assets//logo-light.svg">
     </picture>
 </p>
 <p align="center">
