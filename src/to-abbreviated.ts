@@ -3,31 +3,21 @@ interface Options {
 }
 
 /**
- * Abbreviates large numbers using standard metric-style suffixes (e.g., `k`, `m`, `b`, `t`).
- *
- * Useful for displaying large values in a compact and readable form, such as for
- * social media stats, monetary values, or data counts.
- *
- * @param {number} n - The number to abbreviate.
- * @param {Object} [options] - Optional formatting settings.
- * @param {number} [options.d=1] - Number of decimal places to include in the abbreviated output. (Trailing zeros are removed)
- * @returns {string} A compact, human-readable representation of the number.
- *
+ * Converts a number to an abbreviated string format with suffixes like 'k', 'm', 'b', etc.
+ * 
+ * @param n - The number to abbreviate
+ * @param options - Configuration options
+ * @param options.d - Number of decimal places to display (default: 1)
+ * 
+ * @returns The abbreviated number as a string
+ * 
  * @example
- * toAbbreviated(1500)
- * // Returns: "1.5k"
- *
- * @example
- * toAbbreviated(2500000, { d: 2 })
- * // Returns: "2.5m" (trailing zeros are removed)
- *
- * @example
- * toAbbreviated(987654321)
- * // Returns: "987.7m"
- *
- * @example
- * toAbbreviated(1000000000000)
- * // Returns: "1t"
+ * toAbbreviated(1500)           // "1.5k"
+ * toAbbreviated(2500000)        // "2.5m"
+ * toAbbreviated(1000000, {d: 2}) // "1m" (trailing zeros removed)
+ * toAbbreviated(1234567, {d: 0}) // "1m"
+ * toAbbreviated(500)            // "500"
+ * toAbbreviated(-3400)          // "-3.4k"
  */
 export function toAbbreviated(
     n: number,
