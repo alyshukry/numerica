@@ -4,33 +4,21 @@ interface Options {
 }
 
 /**
- * Inserts a separator character into a number for improved readability.
- *
- * This function groups digits in the integer part of a number into segments
- * (such as thousands) and optionally preserves decimal parts. Useful for 
- * formatting large numbers like `1000000` into `1,000,000`.
- *
- * @param {number} n - The number to format.
- * @param {Object} [options] - Optional formatting settings.
- * @param {string} [options.char=","] - The character used to separate digit groups.
- * @param {number} [options.segment=3] - The number of digits per group.
- * @returns {string} The formatted number string with separators applied.
- *
+ * Formats a number with digit grouping separators for better readability.
+ * 
+ * @param n - The number to format
+ * @param options - Configuration options
+ * @param options.char - The separator character (default: ",")
+ * @param options.segment - Number of digits per group (default: 3)
+ * 
+ * @returns The formatted number as a string with separators
+ * 
  * @example
- * toGrouped(1234567)
- * // Returns: "1,234,567"
- *
- * @example
- * toGrouped(1234567.89)
- * // Returns: "1,234,567.89"
- *
- * @example
- * toGrouped(987654321, { char: " ", segment: 3 })
- * // Returns: "987 654 321"
- *
- * @example
- * toGrouped(123456, { segment: 2, char: "_" })
- * // Returns: "1_23_45_6"
+ * toGrouped(1000000)                    // "1,000,000"
+ * toGrouped(1234.56)                    // "1,234.56"
+ * toGrouped(1000000, {char: '.'})       // "1.000.000" (European format)
+ * toGrouped(1000000, {char: ' '})       // "1 000 000"
+ * toGrouped(12345678, {segment: 4})     // "1234,5678" (custom grouping)
  */
 export function toGrouped(
     n: number,

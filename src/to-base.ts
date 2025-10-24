@@ -1,31 +1,21 @@
 /**
- * Converts a number from one base to another.
- *
- * Supports bases up to 62, using digits, uppercase letters, and lowercase letters as symbols.
- * Throws an error if the number includes invalid characters for the given base.
- *
- * @param {number | string} n - The number to convert. Can be provided as a numeric value or string.
- * @param {number} to - The target base to convert to (e.g., 2 for binary, 16 for hexadecimal).
- * @param {number} [from=10] - The original base of the input number. Defaults to base 10.
- * @returns {string} The number represented in the target base.
- *
- * @throws {Error} Throws an error if the base exceeds 62 or if the number contains invalid digits.
- *
+ * Converts a number from one base to another base.
+ * 
+ * @param n - The number to convert (as a number or string)
+ * @param to - The target base to convert to (2-62)
+ * @param from - The source base of the input number (default: 10)
+ * 
+ * @returns The number represented in the target base as a string
+ * 
+ * @throws {Error} If the base exceeds 62 or if invalid characters are found
+ * 
  * @example
- * toBase("1010", 10, 2)
- * // Returns: "10"
- *
- * @example
- * toBase(255, 16)
- * // Returns: "FF"
- *
- * @example
- * toBase("FF", 10, 16)
- * // Returns: "255"
- *
- * @example
- * toBase("100", 36, 10)
- * // Returns: "2S"
+ * toBase(255, 16)           // "FF" (decimal to hexadecimal)
+ * toBase(255, 2)            // "11111111" (decimal to binary)
+ * toBase('FF', 10, 16)      // "255" (hexadecimal to decimal)
+ * toBase('1010', 10, 2)     // "10" (binary to decimal)
+ * toBase(100, 36)           // "2S" (decimal to base-36)
+ * toBase(-42, 16)           // "-2A" (negative numbers supported)
  */
 export function toBase(n: number | string, to: number, from: number = 10): string {
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'

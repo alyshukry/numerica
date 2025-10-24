@@ -17,37 +17,35 @@ interface Options {
 }
 
 /**
- * Converts a date into a human-readable relative time string.
- *
- * This function compares a given date to the current time (or a custom reference date)
- * and expresses the difference in natural language — for example, `"3 days ago"` or `"in 2 hours"`.
- * It supports multiple levels of detail (e.g., `"1 year, 2 months"`), abbreviations, and optional suffixes.
- *
- * @param {Date} date - The target date to compare against the reference date.
- * @param {Object} [options] - Optional settings to control formatting and precision.
- * @param {Date} [options.now=new Date()] - The reference date to compare with (defaults to the current time).
- * @param {number} [options.lod=1] - Level of detail (number of time units to include).  
- * For example, `2` might produce `"1 year, 2 months"` instead of just `"1 year"`.
- * @param {string} [options.separator=", "] - String used to separate time units in the output.
- * @param {boolean} [options.abbreviate=false] - Whether to abbreviate units (e.g., `"1d"` instead of `"1 day"`).
- * @param {boolean} [options.includeSuffix=true] - Whether to include `"ago"` or `"in"` to indicate direction in time.
- * @returns {string} A human-readable string representing the relative time.
- *
+ * Converts a date to a human-readable relative time string.
+ * 
+ * @param date - The date to convert to relative time
+ * @param options - Configuration options
+ * @param options.now - Reference date for comparison (default: current date/time)
+ * @param options.lod - Level of detail, number of time units to show (default: 1)
+ * @param options.separator - Separator between time units (default: ", ")
+ * @param options.abbreviate - Use short forms like "5h" instead of "5 hours" (default: false)
+ * @param options.includeSuffix - Add "ago" or "in" to the result (default: true)
+ * 
+ * @returns The relative time as a human-readable string
+ * 
  * @example
- * toRelativeTime(new Date(Date.now() - 60000))
- * // Returns: "1 minute ago"
- *
- * @example
- * toRelativeTime(new Date(Date.now() + 3600000))
- * // Returns: "in 1 hour"
- *
- * @example
- * toRelativeTime(new Date(Date.now() - 90061000), { lod: 2 })
- * // Returns: "1 day, 1 hour ago"
- *
- * @example
- * toRelativeTime(new Date(Date.now() - 90061000), { abbreviate: true, includeSuffix: false })
- * // Returns: "1d, 1h"
+ * // Assuming now is Jan 1, 2024, 12:00 PM
+ * toRelativeTime(new Date('2024-01-01T10:00'))     // "2 hours ago"
+ * toRelativeTime(new Date('2024-01-03T12:00'))     // "in 2 days"
+ * toRelativeTime(new Date('2024-01-01T11:58'))     // "just now"
+ * 
+ * // With level of detail = 2
+ * toRelativeTime(new Date('2023-12-30T10:00'), {lod: 2})
+ * // "2 days, 2 hours ago"
+ * 
+ * // Abbreviated format
+ * toRelativeTime(new Date('2024-01-03T14:30'), {abbreviate: true})
+ * // "in 2d"
+ * 
+ * // Without suffix
+ * toRelativeTime(new Date('2024-01-01T10:00'), {includeSuffix: false})
+ * // "2 hours"
  */
 export function toRelativeTime(
     date: Date,
