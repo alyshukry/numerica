@@ -1,6 +1,6 @@
 {
     "name": "numerica",
-    "version": "3.0.4",
+    "version": "3.1.0",
     "description": "A utility library for number formatting and string-to-number parsing.",
     "main": "./dist/cjs/index.js",
     "module": "./dist/esm/index.js",
