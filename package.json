@@ -17,7 +17,7 @@
         "lint": "eslint src --fix --max-warnings=0 && echo No linting issues found.",
         "docs:generate": "typedoc",
         "docs:publish": "npm run docs:generate && echo numerica.js.org > docs/CNAME && git add docs && git diff --cached --quiet || (git commit -m \"docs: update documentation\" && git push)",
-        "build": "tsup src/index.ts --format cjs,esm --dts && npm run docs:generate && git add . && git commit -m \"build: compile ts and generate docs\"",
+        "build": "tsup src/index.ts --format cjs,esm --dts && npm run docs:publish && git add . && git commit -m \"build: compile ts and generate docs\"",
         "release:patch": "npm version patch -m \"v%s - patch release\" && git push && git push --tags",
         "release:minor": "npm version minor -m \"v%s - minor release\" && git push && git push --tags",
         "release:major": "npm version major -m \"v%s - major release\" && git push && git push --tags",
