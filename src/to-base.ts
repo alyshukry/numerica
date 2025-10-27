@@ -52,7 +52,7 @@ export function toBase(n: number | string, to: number, from: number = 10, precis
         .reduce((acc, val) => acc * from + val, 0)
 
     // Convert fractional part to base 10
-    let fracPart10 = 0;
+    let fracPart10 = 0
     for (let i = 0; i < fracPartStr.length; i++) {
         const val = chars.indexOf(fracPartStr[i])
         fracPart10 += val / Math.pow(from, i + 1)
@@ -73,7 +73,7 @@ export function toBase(n: number | string, to: number, from: number = 10, precis
     // Convert fractional part to target base
     let fracPart = num10 - Math.floor(num10)
     const fracResult: string[] = []
-    let count = 0;
+    let count = 0
     while (fracPart > 0 && count < precision) {
         fracPart *= to
         const digit = Math.floor(fracPart)
