@@ -1,36 +1,44 @@
+interface Options {
+    from?: number,
+    precision?: number,
+}
+
 /**
  * Converts a number from one base to another base (supports fractional and negative numbers).
  * 
- * @param {number | string} n - The number to convert. Can be provided as a numeric value or string.
- * @param {number} to - The target base to convert to (e.g., 2 for binary, 16 for hexadecimal).
- * @param {number} [from=10] - The original base of the input number. Defaults to base 10.
- * @param {number} [precision=8] - The maximum number of digits to include after the decimal point when converting fractional values.
+ * @param {number | string} n - The number to convert. Can be a numeric value or string
+ * @param {number} to - The target base to convert to (e.g., 2 for binary, 16 for hexadecimal)
+ * @param {Options} [options] - Configuration options
+ * @param {number} [options.from=10] - The original base of the input number. Defaults to base 10
+ * @param {number} [options.precision=8] - The maximum number of digits to include after the decimal point when converting fractional values
  * 
- * @returns {string} The number represented in the target base.
+ * @returns {string} The number represented in the target base
  * 
- * @throws {Error} Throws an error if the base exceeds 62 or if the number contains invalid digits.
+ * @throws {Error} Throws an error if the base exceeds 62 or if the number contains invalid digits
  * 
  * @example
  * // Integer conversions
- * convertBase(255, 16)           // "FF"   (decimal to hexadecimal)
- * convertBase(255, 2)            // "11111111" (decimal to binary)
- * convertBase('FF', 10, 16)      // "255"  (hexadecimal to decimal)
- * convertBase('1010', 10, 2)     // "10"   (binary to decimal)
- * convertBase(100, 36)           // "2S"   (decimal to base-36)
- * convertBase(-42, 16)           // "-2A"  (negative numbers supported)
+ * toBase(255, 16)                        // "FF"   (decimal to hexadecimal)
+ * toBase(255, 2)                         // "11111111" (decimal to binary)
+ * toBase('FF', 10, { from: 16 })         // "255"  (hexadecimal to decimal)
+ * toBase('1010', 10, { from: 2 })        // "10"   (binary to decimal)
+ * toBase(100, 36)                        // "2S"   (decimal to base-36)
+ * toBase(-42, 16)                        // "-2A"  (negative numbers supported)
  * 
  * // Fractional conversions
- * convertBase(10.5, 16)          // "A.8"  (decimal to hexadecimal with fractional part)
- * convertBase(10.75, 2)          // "1010.11" (decimal to binary with fractional part)
- * convertBase('A.8', 10, 16)     // "10.5" (hexadecimal with fraction to decimal)
- * convertBase('-2A.4', 10, 16)   // "-42.25" (negative fractional conversion)
+ * toBase(10.5, 16)                       // "A.8"  (decimal to hexadecimal with fractional part)
+ * toBase(10.75, 2)                       // "1010.11" (decimal to binary with fractional part)
+ * toBase('A.8', 10, { from: 16 })        // "10.5" (hexadecimal with fraction to decimal)
+ * toBase('-2A.4', 10, { from: 16 })      // "-42.25" (negative fractional conversion)
  */
 export function toBase(
     n: number | string,
     to: number,
-    from: number = 10,
-    precision: number = 8,
-): string {
+    {
+        from = 10,
+        precision = 8,
+
+    }: Options = {}): string {
     const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
     if (to > chars.length || from > chars.length)
