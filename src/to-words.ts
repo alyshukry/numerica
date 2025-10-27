@@ -24,7 +24,28 @@ const THOUSANDS = [
     '', 'thousand', 'million', 'billion', 'trillion',
 ]
 
-export function spell(
+/**
+ * Converts a number to its written word representation.
+ * 
+ * @param n - The number to convert to words
+ * @param options - Configuration options
+ * @param options.hyphens - Use hyphens in compound numbers like "twenty-one" (default: false)
+ * @param options.and - Include "and" (British style: "one hundred and five") (default: false)
+ * @param options.separator - Separator between words (default: " ")
+ * 
+ * @returns The number spelled out in words
+ * 
+ * @example
+ * toWords(42)                          // "forty two"
+ * toWords(42, {hyphens: true})         // "forty-two"
+ * toWords(105, {and: true})            // "one hundred and five"
+ * toWords(1234)                        // "one thousand two hundred thirty four"
+ * toWords(1000000)                     // "one million"
+ * toWords(0)                           // "zero"
+ * toWords(3.14)                        // "three point one four"
+ * toWords(0.5)                         // "zero point five"
+ */
+export function toWords(
     n: number,
     {
         hyphens = false,

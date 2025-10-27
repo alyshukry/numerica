@@ -1,0 +1,282 @@
+{
+    "locale": "en-US",
+    "name": "English (United States)",
+    "numbers": {
+        "digits": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9"
+        ],
+        "base": {
+            "0": "zero",
+            "1": "one",
+            "2": "two",
+            "3": "three",
+            "4": "four",
+            "5": "five",
+            "6": "six",
+            "7": "seven",
+            "8": "eight",
+            "9": "nine",
+            "10": "ten",
+            "11": "eleven",
+            "12": "twelve",
+            "13": "thirteen",
+            "14": "fourteen",
+            "15": "fifteen",
+            "16": "sixteen",
+            "17": "seventeen",
+            "18": "eighteen",
+            "19": "nineteen"
+        },
+        "tens": {
+            "20": "twenty",
+            "30": "thirty",
+            "40": "forty",
+            "50": "fifty",
+            "60": "sixty",
+            "70": "seventy",
+            "80": "eighty",
+            "90": "ninety"
+        },
+        "scales": {
+            "100": "hundred",
+            "1000": "thousand",
+            "1000000": "million",
+            "1000000000": "billion",
+            "1000000000000": "trillion"
+        }
+    },
+    "structure": {
+        "reading_direction": "ltr",
+        "number_order": "big_endian",
+        "compound_order": "tens_first",
+        "scale_position": "after",
+        "connector": "-",
+        "space_before_scale": true,
+        "and_before_tens": false,
+        "and_before_ones": false,
+        "repeat_scale": false,
+        "use_long_scale": false
+    },
+    "ordinals": {
+        "suffix_rules": [
+            {
+                "match": "1$",
+                "suffix": "st",
+                "except": [
+                    "11"
+                ]
+            },
+            {
+                "match": "2$",
+                "suffix": "nd",
+                "except": [
+                    "12"
+                ]
+            },
+            {
+                "match": "3$",
+                "suffix": "rd",
+                "except": [
+                    "13"
+                ]
+            },
+            {
+                "match": ".*",
+                "suffix": "th"
+            }
+        ],
+        "words": {
+            "1": "first",
+            "2": "second",
+            "3": "third",
+            "4": "fourth",
+            "5": "fifth",
+            "8": "eighth",
+            "9": "ninth",
+            "12": "twelfth"
+        },
+        "prefix": false,
+        "word_modification": "replace_y_with_ieth"
+    },
+    "formatting": {
+        "decimal_separator": ".",
+        "thousands_separator": ",",
+        "grouping": [
+            3
+        ],
+        "negative_sign": "-",
+        "negative_format": "-{number}",
+        "positive_sign": "+",
+        "positive_format": "{number}",
+        "infinity": "∞",
+        "nan": "NaN",
+        "percent_symbol": "%",
+        "percent_position": "after",
+        "space_before_percent": false
+    },
+    "currency": {
+        "symbol": "$",
+        "code": "USD",
+        "position": "before",
+        "space_after_symbol": false,
+        "decimal_digits": 2,
+        "negative_format": "-{symbol}{number}"
+    },
+    "fractions": {
+        "separator": "/",
+        "format": "{numerator}{separator}{denominator}",
+        "read_as": "over",
+        "special_halves": {
+            "0.5": "half",
+            "1.5": "one and a half"
+        }
+    },
+    "grammatical": {
+        "has_gender": false,
+        "gender_rules": null,
+        "plural_forms": 2,
+        "plural_rules": [
+            {
+                "count": 1,
+                "form": "singular"
+            },
+            {
+                "count": "other",
+                "form": "plural"
+            }
+        ],
+        "case_system": false,
+        "case_rules": null,
+        "agreement": {
+            "number_affects_noun": true,
+            "number_affects_verb": false,
+            "number_affects_adjective": false
+        }
+    },
+    "dates": {
+        "format": "MM/DD/YYYY",
+        "order": [
+            "month",
+            "day",
+            "year"
+        ],
+        "separator": "/",
+        "months": {
+            "1": "January",
+            "2": "February",
+            "3": "March",
+            "4": "April",
+            "5": "May",
+            "6": "June",
+            "7": "July",
+            "8": "August",
+            "9": "September",
+            "10": "October",
+            "11": "November",
+            "12": "December"
+        },
+        "months_short": {
+            "1": "Jan",
+            "2": "Feb",
+            "3": "Mar",
+            "4": "Apr",
+            "5": "May",
+            "6": "Jun",
+            "7": "Jul",
+            "8": "Aug",
+            "9": "Sep",
+            "10": "Oct",
+            "11": "Nov",
+            "12": "Dec"
+        },
+        "days": [
+            "Sunday",
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday"
+        ],
+        "days_short": [
+            "Sun",
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat"
+        ]
+    },
+    "time": {
+        "format": "12",
+        "separator": ":",
+        "am": "AM",
+        "pm": "PM",
+        "am_pm_position": "after",
+        "space_before_am_pm": true
+    },
+    "special_cases": {
+        "zero_forms": [
+            "zero",
+            "o",
+            "oh"
+        ],
+        "double_digit_special": {
+            "00": "hundred",
+            "000": "thousand"
+        },
+        "teen_pattern": true,
+        "collective_numbers": {},
+        "alternative_forms": {
+            "0": [
+                "zero",
+                "nought",
+                "nil"
+            ]
+        }
+    },
+    "parsing": {
+        "multipliers": {
+            "hundred": 100,
+            "thousand": 1000,
+            "million": 1000000,
+            "billion": 1000000000,
+            "trillion": 1000000000000,
+            "k": 1000,
+            "m": 1000000,
+            "b": 1000000000
+        },
+        "ignore_words": [
+            "and",
+            "a"
+        ],
+        "negative_words": [
+            "negative",
+            "minus"
+        ],
+        "decimal_words": [
+            "point"
+        ],
+        "case_sensitive": false,
+        "allow_whitespace": true,
+        "strict_mode": false
+    },
+    "alternatives": {
+        "regional_variants": [
+            "en-GB",
+            "en-AU"
+        ],
+        "formal_register": false,
+        "informal_contractions": {}
+    }
+}

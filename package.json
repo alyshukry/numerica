@@ -1,19 +1,23 @@
 {
     "name": "numerica",
-    "version": "2.0.1",
-    "description": "🔢 A useful number formatting library for frontend developers.",
-    "main": "dist/index.js",
-    "types": "dist/index.d.ts",
+    "version": "3.1.0",
+    "description": "A utility library for number formatting and string-to-number parsing.",
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        "require": "./dist/cjs/index.js",
+        "import": "./dist/esm/index.js"
+    },
     "files": [
         "dist"
     ],
     "scripts": {
         "test": "vitest run",
-        "compile": "tsc",
         "lint": "eslint src --fix --max-warnings=0 && echo No linting issues found.",
         "docs:generate": "typedoc",
         "docs:publish": "npm run docs:generate && echo numerica.js.org > docs/CNAME && git add docs && git diff --cached --quiet || (git commit -m \"docs: update documentation\" && git push)",
-        "build": "npm run compile && npm run docs:generate && git add . && git commit -m \"build: compile ts and generate docs\"",
+        "build": "tsup src/index.ts --format cjs,esm --dts && npm run docs:publish && git add . && git commit -m \"build: compile ts and generate docs\"",
         "release:patch": "npm version patch -m \"v%s - patch release\" && git push && git push --tags",
         "release:minor": "npm version minor -m \"v%s - minor release\" && git push && git push --tags",
         "release:major": "npm version major -m \"v%s - major release\" && git push && git push --tags",
@@ -42,6 +46,7 @@
         "globals": "^16.4.0",
         "jiti": "^2.6.1",
         "jsdoc": "^4.0.5",
+        "tsup": "^8.5.0",
         "typedoc": "^0.28.13",
         "typedoc-github-theme": "^0.3.1",
         "typescript-eslint": "^8.46.0",

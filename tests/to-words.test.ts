@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest"
-import { spell } from "../src/spell"
+import { toWords } from "../src/to-words"
 
 // Basic integers
 describe.each([
@@ -18,9 +18,9 @@ describe.each([
     [115, {}, "one hundred fifteen"],
     [123, {}, "one hundred twenty three"],
     [999, {}, "nine hundred ninety nine"]
-])("spell() — basic integers", (n, options, expected) => {
+])("toWords() — basic integers", (n, options, expected) => {
     it(`should convert ${n} to "${expected}"`, () => {
-        expect(spell(n, options)).toBe(expected)
+        expect(toWords(n, options)).toBe(expected)
     })
 })
 
@@ -29,9 +29,9 @@ describe.each([
     [101, { and: true }, "one hundred and one"],
     [120, { and: true }, "one hundred and twenty"],
     [999, { and: true }, "nine hundred and ninety nine"]
-])("spell() — with 'and' option", (n, options, expected) => {
+])("toWords() — with 'and' option", (n, options, expected) => {
     it(`should include 'and' correctly for ${n}`, () => {
-        expect(spell(n, options)).toBe(expected)
+        expect(toWords(n, options)).toBe(expected)
     })
 })
 
@@ -40,9 +40,9 @@ describe.each([
     [21, { hyphens: true }, "twenty-one"],
     [45, { hyphens: true }, "forty-five"],
     [99, { hyphens: true }, "ninety-nine"]
-])("spell() — with hyphens", (n, options, expected) => {
+])("toWords() — with hyphens", (n, options, expected) => {
     it(`should hyphenate correctly for ${n}`, () => {
-        expect(spell(n, options)).toBe(expected)
+        expect(toWords(n, options)).toBe(expected)
     })
 })
 
@@ -50,9 +50,9 @@ describe.each([
 describe.each([
     [123, { separator: "-" }, "one-hundred-twenty-three"],
     [1001, { separator: "-" }, "one-thousand-one"]
-])("spell() — custom separators", (n, options, expected) => {
+])("toWords() — custom separators", (n, options, expected) => {
     it(`should use custom separator for ${n}`, () => {
-        expect(spell(n, options)).toBe(expected)
+        expect(toWords(n, options)).toBe(expected)
     })
 })
 
@@ -64,9 +64,9 @@ describe.each([
     [1002003, {}, "one million two thousand three"],
     [1234567, {}, "one million two hundred thirty four thousand five hundred sixty seven"],
     [1000000000, {}, "one billion"]
-])("spell() — large numbers", (n, options, expected) => {
+])("toWords() — large numbers", (n, options, expected) => {
     it(`should correctly convert large numbers like ${n}`, () => {
-        expect(spell(n, options)).toBe(expected)
+        expect(toWords(n, options)).toBe(expected)
     })
 })
 
@@ -76,9 +76,9 @@ describe.each([
     [45.67, { hyphens: true }, "forty-five point six seven"],
     [0.5, {}, "zero point five"],
     [12.34, {}, "twelve point three four"]
-])("spell() — decimal numbers", (n, options, expected) => {
+])("toWords() — decimal numbers", (n, options, expected) => {
     it(`should correctly spell decimal ${n}`, () => {
-        expect(spell(n, options)).toBe(expected)
+        expect(toWords(n, options)).toBe(expected)
     })
 })
 
@@ -86,9 +86,9 @@ describe.each([
 describe.each([
     [1234, { and: true, hyphens: true }, "one thousand two hundred and thirty-four"],
     [1200456, { and: true, separator: "_" }, "one_million_two_hundred_thousand_four_hundred_and_fifty_six"],
-])("spell() — combined formatting", (n, options, expected) => {
+])("toWords() — combined formatting", (n, options, expected) => {
     it(`should handle combined options for ${n}`, () => {
-        expect(spell(n, options)).toBe(expected)
+        expect(toWords(n, options)).toBe(expected)
     })
 })
 
@@ -98,14 +98,14 @@ describe.each([
     [1000000000000, {}, "one trillion"],
     [999999999999999, {}, "nine hundred ninety nine trillion nine hundred ninety nine billion nine hundred ninety nine million nine hundred ninety nine thousand nine hundred ninety nine"],
     [7.007, {}, "seven point zero zero seven"],
-])("spell() — edge and extreme values", (n, options, expected) => {
+])("toWords() — edge and extreme values", (n, options, expected) => {
     it(`should handle edge number ${n}`, () => {
-        expect(spell(n, options)).toBe(expected)
+        expect(toWords(n, options)).toBe(expected)
     })
 })
 
 // Notes on potential inconsistencies
-describe("spell() — potential improvements", () => {
+describe("toWords() — potential improvements", () => {
     it("should possibly trim extra separators at thousand boundaries (if they appear)", () => {
         // Current logic adds a separator even when a chunk is empty before appending thousand/million, etc.
         // Example fix would be: skip appending THOUSANDS[i] if chunk == 0.
