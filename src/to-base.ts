@@ -29,65 +29,65 @@ export function toBase(
     n: number | string,
     to: number,
     from: number = 10,
-    precision: number = 8
+    precision: number = 8,
 ): string {
-    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+    const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
 
     if (to > chars.length || from > chars.length)
-        throw new Error(`Largest base supported is ${chars.length}.`);
+        throw new Error(`Largest base supported is ${chars.length}.`)
 
-    const str = n.toString();
-    const isNegative = str.startsWith('-');
-    const [intPartStr, fracPartStr = ''] = str.replace(/^-/, '').split('.');
+    const str = n.toString()
+    const isNegative = str.startsWith('-')
+    const [intPartStr, fracPartStr = ''] = str.replace(/^-/, '').split('.')
 
     const validateDigits = (digits: string, base: number) => {
         for (const d of digits) {
-            const idx = chars.indexOf(d);
-            if (idx === -1) throw new Error(`Invalid character '${d}' in number.`);
-            if (idx >= base) throw new Error(`Digit '${d}' not valid in base ${base}.`);
+            const idx = chars.indexOf(d)
+            if (idx === -1) throw new Error(`Invalid character '${d}' in number.`)
+            if (idx >= base) throw new Error(`Digit '${d}' not valid in base ${base}.`)
         }
-    };
-    validateDigits(intPartStr, from);
-    if (fracPartStr) validateDigits(fracPartStr, from);
+    }
+    validateDigits(intPartStr, from)
+    if (fracPartStr) validateDigits(fracPartStr, from)
 
     // Convert integer part to base 10
     const intPart10 = intPartStr
         .split('')
         .map((d) => chars.indexOf(d))
-        .reduce((acc, val) => acc * from + val, 0);
+        .reduce((acc, val) => acc * from + val, 0)
 
     // Convert fractional part to base 10
-    let fracPart10 = 0;
+    let fracPart10 = 0
     for (let i = 0; i < fracPartStr.length; i++) {
-        const val = chars.indexOf(fracPartStr[i]);
-        fracPart10 += val / Math.pow(from, i + 1);
+        const val = chars.indexOf(fracPartStr[i])
+        fracPart10 += val / Math.pow(from, i + 1)
     }
 
-    const num10 = intPart10 + fracPart10;
+    const num10 = intPart10 + fracPart10
 
     // Convert integer part from base 10 to target base
-    let intPart = Math.floor(num10);
-    const intResult: string[] = [];
-    if (intPart === 0) intResult.push('0');
+    let intPart = Math.floor(num10)
+    const intResult: string[] = []
+    if (intPart === 0) intResult.push('0')
     while (intPart > 0) {
-        const remainder = intPart % to;
-        intResult.unshift(chars[remainder]);
-        intPart = Math.floor(intPart / to);
+        const remainder = intPart % to
+        intResult.unshift(chars[remainder])
+        intPart = Math.floor(intPart / to)
     }
 
     // Convert fractional part to target base
-    let fracPart = num10 - Math.floor(num10);
-    const fracResult: string[] = [];
-    let count = 0;
+    let fracPart = num10 - Math.floor(num10)
+    const fracResult: string[] = []
+    let count = 0
     while (fracPart > 0 && count < precision) {
-        fracPart *= to;
-        const digit = Math.floor(fracPart);
-        fracResult.push(chars[digit]);
-        fracPart -= digit;
-        count++;
+        fracPart *= to
+        const digit = Math.floor(fracPart)
+        fracResult.push(chars[digit])
+        fracPart -= digit
+        count++
     }
 
     const result =
-        intResult.join('') + (fracResult.length ? '.' + fracResult.join('') : '');
-    return isNegative ? '-' + result : result;
+        intResult.join('') + (fracResult.length ? '.' + fracResult.join('') : '')
+    return isNegative ? '-' + result : result
 }
