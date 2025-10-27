@@ -52,12 +52,12 @@ export function separate(
     )
 
     // Reverse back and remove any accidental leading separator
-    const escaped_char = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+    const escapedChar = char.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
     parts[0] = grouped
         .split('')
         .reverse()
         .join('')
-        .replace(new RegExp(`^${escaped_char}`), '')
+        .replace(new RegExp(`^${escapedChar}`), '')
 
     return parts.join('.')
 }
