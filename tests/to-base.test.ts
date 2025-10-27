@@ -138,10 +138,10 @@ describe.each([
     ["1010.1", 10, 2, "10.5"],
     ["1010.11", 10, 2, "10.75"],
     ["101.01", 10, 2, "5.25"]
-])("convertBase() — fractional numbers", (n, to, from, expected) => {
+])("toBase() — fractional numbers", (n, to, from, expected) => {
     it(`should correctly convert fractional ${JSON.stringify(n)} to "${expected}"`, () => {
-        if (from === undefined) expect(convertBase(n as any, to)).toBe(expected)
-        else expect(convertBase(n as any, to, from as number)).toBe(expected)
+        if (from === undefined) expect(toBase(n as any, to)).toBe(expected)
+        else expect(toBase(n as any, to, from as number)).toBe(expected)
     })
 })
 
@@ -151,30 +151,30 @@ describe.each([
     ["-A.8", 10, 16, "-10.5"],
     [-42.25, 16, undefined, "-2A.4"],
     ["-2A.4", 10, 16, "-42.25"]
-])("convertBase() — negative fractional numbers", (n, to, from, expected) => {
+])("toBase() — negative fractional numbers", (n, to, from, expected) => {
     it(`should handle negative fractional input ${JSON.stringify(n)}`, () => {
-        if (from === undefined) expect(convertBase(n as any, to)).toBe(expected)
-        else expect(convertBase(n as any, to, from as number)).toBe(expected)
+        if (from === undefined) expect(toBase(n as any, to)).toBe(expected)
+        else expect(toBase(n as any, to, from as number)).toBe(expected)
     })
 })
 
 // Precision control
-describe("convertBase() — precision parameter", () => {
+describe("toBase() — precision parameter", () => {
     it("should limit fractional digits according to precision", () => {
         // 1/3 in decimal -> repeating fraction in binary (~0.010101...)
-        const res = convertBase(1 / 3, 2, 10, 5)
+        const res = toBase(1 / 3, 2, 10, 5)
         expect(res.startsWith("0.")).
             toBe(true)
         expect(res.split(".")[1].length).toBeLessThanOrEqual(5)
     })
 
     it("should increase fractional digits when precision is higher", () => {
-        const lowPrecision = convertBase(0.1, 2, 10, 3)
-        const highPrecision = convertBase(0.1, 2, 10, 10)
+        const lowPrecision = toBase(0.1, 2, 10, 3)
+        const highPrecision = toBase(0.1, 2, 10, 10)
         expect(highPrecision.length).toBeGreaterThan(lowPrecision.length)
     })
 
     it("should not throw when fractional part is zero", () => {
-        expect(convertBase(42.0, 16)).toBe("2A")
+        expect(toBase(42.0, 16)).toBe("2A")
     })
 })

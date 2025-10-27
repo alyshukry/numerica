@@ -25,7 +25,7 @@
  * convertBase('A.8', 10, 16)     // "10.5" (hexadecimal with fraction to decimal)
  * convertBase('-2A.4', 10, 16)   // "-42.25" (negative fractional conversion)
  */
-export function convertBase(
+export function toBase(
     n: number | string,
     to: number,
     from: number = 10,
