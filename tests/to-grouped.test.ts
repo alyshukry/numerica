@@ -27,22 +27,22 @@ describe.each([
     })
 })
 
-// Custom separator characters
+// Custom separator separatoracters
 describe.each([
-    [1234567, { char: " " }, "1 234 567"],
-    [1234567, { char: "_" }, "1_234_567"],
-    [1234567, { char: "." }, "1.234.567"]
+    [1234567, { separator: " " }, "1 234 567"],
+    [1234567, { separator: "_" }, "1_234_567"],
+    [1234567, { separator: "." }, "1.234.567"]
 ])("toGrouped() — custom separators", (n, options, expected) => {
-    it(`should use custom separator "${options.char}"`, () => {
+    it(`should use custom separator "${options.separator}"`, () => {
         expect(toGrouped(n, options)).toBe(expected)
     })
 })
 
 // Custom segment lengths
 describe.each([
-    [123456, { segment: 2, char: "_" }, "12_34_56"],
-    [1234567, { segment: 4, char: " " }, "123 4567"],
-    [987654321, { segment: 1, char: "-" }, "9-8-7-6-5-4-3-2-1"]
+    [123456, { segment: 2, separator: "_" }, "12_34_56"],
+    [1234567, { segment: 4, separator: " " }, "123 4567"],
+    [987654321, { segment: 1, separator: "-" }, "9-8-7-6-5-4-3-2-1"]
 ])("toGrouped() — custom segment lengths", (n, options, expected) => {
     it(`should separate ${n} into segments of ${options.segment}`, () => {
         expect(toGrouped(n, options)).toBe(expected)
@@ -53,7 +53,7 @@ describe.each([
 describe.each([
     [-1234, {}, "-1,234"],
     [-9876543.21, {}, "-9,876,543.21"],
-    [-123456, { char: " ", segment: 2 }, "-12 34 56"]
+    [-123456, { separator: " ", segment: 2 }, "-12 34 56"]
 ])("toGrouped() — negative numbers", (n, options, expected) => {
     it(`should handle negative numbers like ${n}`, () => {
         expect(toGrouped(n, options)).toBe(expected)

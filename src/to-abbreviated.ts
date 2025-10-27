@@ -1,5 +1,5 @@
 interface Options {
-    d?: number,
+    decimals?: number,
     trim?: boolean
 }
 
@@ -8,7 +8,7 @@ interface Options {
  * 
  * @param n - The number to abbreviate
  * @param options - Configuration options
- * @param options.d - Number of decimal places to display (default: 1)
+ * @param options.decimals - Number of decimal places to display (default: 1)
  * @param options.trim - Whether to display trailing zeros (default: true)
  * 
  * @returns The abbreviated number as a string
@@ -16,16 +16,16 @@ interface Options {
  * @example
  * toAbbreviated(1500)           // "1.5k"
  * toAbbreviated(2500000)        // "2.5m"
- * toAbbreviated(1000000, {d: 2, trim: true}) // "1m"
- * toAbbreviated(1000000, {d: 2, trim: false}) // "1.00m"
- * toAbbreviated(1234567, {d: 0}) // "1m"
+ * toAbbreviated(1000000, {decimals: 2, trim: true}) // "1m"
+ * toAbbreviated(1000000, {decimals: 2, trim: false}) // "1.00m"
+ * toAbbreviated(1234567, {decimals: 0}) // "1m"
  * toAbbreviated(500)            // "500"
  * toAbbreviated(-3400)          // "-3.4k"
  */
 export function toAbbreviated(
     n: number,
     {
-        d = 1,
+        decimals = 1,
         trim = true,
 
     }: Options = {}): string {
@@ -50,7 +50,7 @@ export function toAbbreviated(
             return sign + String(abs)
         }
         // Else, format to 'd' decimals then remove trailing zeros if enabled
-        let number = abs.toFixed(d)
+        let number = abs.toFixed(decimals)
         if (trim) number = number.replace(/\.?0+$/, '')
         return sign + number
     }
@@ -60,10 +60,10 @@ export function toAbbreviated(
 
     const value = abs / (1000 ** index)
     // Format with 'd' decimals, then trim trailing zeros
-    let string = value.toFixed(d)
+    let string = value.toFixed(decimals)
     if (trim) string = string.replace(/\.?0+$/, '')
 
     return sign + string + suffixes[index]
 }
 
-console.log(toAbbreviated(1000000, { d: 2, trim: true }))
+console.log(toAbbreviated(1000000, { decimals: 2, trim: true }))
