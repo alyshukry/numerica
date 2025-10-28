@@ -5,9 +5,9 @@
         <img alt="numerica logo" src=".github/assets/logo-light.png" width="500px">
     </picture>
 </p>
-<h2 align="center" style="font-family: monospace;">
+<h3 align="center" style="font-family: monospace;">
     A utility library for number formatting.<br>String-to-number parsing coming soon.
-</h2>
+</h3>
 <br>
 
 ## Navigation
