@@ -1,11 +1,11 @@
 <p align="center">
     <picture>
-        <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.svg">
-        <source media="(prefers-color-scheme: light)" srcset=".github/assets/logo-light.svg">
-        <img alt="numerica logo" src=".github/assets//logo-light.svg" width="500px">
+        <source media="(prefers-color-scheme: dark)" srcset=".github/assets/logo-dark.png">
+        <source media="(prefers-color-scheme: light)" srcset=".github/assets/logo-light.png">
+        <img alt="numerica logo" src=".github/assets/logo-light.png" width="500px">
     </picture>
 </p>
-<h2 align="center">
+<h2 align="center" style="font-family: monospace;">
     A utility library for number formatting.<br>String-to-number parsing coming soon.
 </h2>
 <br>
