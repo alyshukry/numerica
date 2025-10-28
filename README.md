@@ -44,6 +44,6 @@ toFraction(2.5, { mixed: true, pretty: true }) // Returns "2 1⁄2"
 toFraction(2.5, { symbol: "|" }) // Returns "5|2"
 ```
 ```js
-toBase("HELLO", 36, 10) // Returns "1495338607"
-toBase(123, 10, 2) // Returns "1111011"
+toBase("HELLO", 36, { from: 10}) // Returns "1495338607"
+toBase(123, 10, { from: 2}) // Returns "1111011"
 ```
