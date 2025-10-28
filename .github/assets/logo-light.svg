@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
-   viewBox="25 15 349.27539 75"
+   viewBox="25 15 359.27539 75"
    version="1.1"
    id="svg2"
-   width="349.27539"
+   width="359.27539"
    height="75"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
@@ -17,7 +17,8 @@
      rx="0"
      ry="0"
      fill="#000000"
-     id="rect1" />
+     id="rect1"
+     style="fill:#000000;fill-opacity:1" />
   <text
      x="29.5"
      y="72.5"
@@ -25,13 +26,15 @@
      font-family="Consolas, monospace"
      font-size="60px"
      font-weight="900"
-     id="text1">n,</text>
+     id="text1"
+     style="fill:#ffffff;fill-opacity:1">n,</text>
   <text
-     x="114.5"
+     x="124.5"
      y="72.5"
      fill="#000000"
      font-family="Consolas, monospace"
      font-size="60px"
      font-weight="900"
-     id="text2">numerica</text>
+     id="text2"
+     style="fill:#000000;fill-opacity:1">numerica</text>
 </svg>
