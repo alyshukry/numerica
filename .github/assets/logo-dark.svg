@@ -18,16 +18,16 @@
      ry="0"
      fill="#000000"
      id="rect1"
-     style="fill:#ffffff;fill-opacity:1" />
+     style="fill:#000000;fill-opacity:1" />
   <text
-     x="29.5"
+     x="29.158703"
      y="72.5"
      fill="#ffffff"
      font-family="Consolas, monospace"
      font-size="60px"
      font-weight="900"
      id="text1"
-     style="fill:#000000;fill-opacity:1">n,</text>
+     style="fill:#ffffff;fill-opacity:1">n,</text>
   <text
      x="124.5"
      y="72.5"
