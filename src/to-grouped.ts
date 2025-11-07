@@ -1,6 +1,7 @@
 interface Options {
     separator?: string,
-    segment?: number
+    decimal?: string,
+    segment?: number | number[]
 }
 
 /**
@@ -8,7 +9,8 @@ interface Options {
  * 
  * @param n - The number to format
  * @param options - Configuration options
- * @param options.separator - The separator separatoracter (default: ",")
+ * @param options.separator - The separator character (default: ",")
+ * @param options.decimal - The decimal separator character (default: ".")
  * @param options.segment - Number of digits per group (default: 3)
  * 
  * @returns The formatted number as a string with separators
@@ -19,33 +21,44 @@ interface Options {
  * toGrouped(1000000, {separator: '.'})       // "1.000.000" (European format)
  * toGrouped(1000000, {separator: ' '})       // "1 000 000"
  * toGrouped(12345678, {segment: 4})     // "1234,5678" (custom grouping)
+ * toGrouped(12345678, {segment: [3, 2]})     // "1,23,45,678" (Indian numbering)
  */
 export function toGrouped(
     n: number,
     {
         separator = ',',
+        decimal = '.',
         segment = 3,
 
     }: Options = {}): string {
 
-    const parts = n.toString().split('.')
+    if (n === Infinity || n === -Infinity) return n.toString()
+
+    const isNegative = n < 0
+    const parts = n.toString().replace('-', '').split('.')
+
+    segment = Array.isArray(segment) ? segment : [segment]
 
     // Reverse integer part
-    const reversed = parts[0].split('').reverse().join('')
+    const reversed = parts[0].split('').reverse()
 
-    // Insert separator every `segment` digits
-    const grouped = reversed.replace(
-        new RegExp(`(\\d{${segment}})(?=\\d)`, 'g'),
-        `$1${separator}`,
-    )
+    const string: string[] = []
+    const loops = reversed.length // Copying the reversed number's size onto 'loops', since the 'reversed' array is getting spliced
+    for (let i = 0; i < loops; i++) {
+        if (reversed.length === 0) break
 
-    // Reverse back and remove any accidental leading separator
-    const escapedseparator = separator.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
-    parts[0] = grouped
-        .split('')
-        .reverse()
-        .join('')
-        .replace(new RegExp(`^${escapedseparator}`), '')
+        const currentSegment = i < segment.length ? segment[i] : segment[segment.length - 1]
 
-    return parts.join('.')
+        string.push(reversed.slice(0, currentSegment).map((n) => n.toString()).join(''))
+        string.push(separator)
+
+        reversed.splice(0, currentSegment)
+    }
+
+    string.pop() // Remove leading separator character
+    parts[0] = string.join('').split('').reverse().join('')
+
+    return (isNegative ? '-' : '') + parts.join(decimal)
 }
+
+console.log(toGrouped(Infinity, { segment: [3, 2] }))
