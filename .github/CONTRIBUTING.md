@@ -14,4 +14,4 @@ Thanks for considering contributing! All improvements are welcome, big or small.
 4.  To run the test suite, first install the dependencies by running `npm install`, then run `npm test`.
 5.  Ensure your code is linted by running `npm run lint` -- fix any issue you see listed.
 6.  If the tests pass, commit your changes to your fork and create a pull request from there.
-    -   Reference your issue in the pull request description (e.g., `fixes #123`) and follow [Conventional Commits](https://gist.github.com/qoomon/5dfcdf8eec66a051ecd85625518cfd13) for both commit messages and PR titles.
+    -   Reference your issue in the pull request description (e.g., `fixes #123`) and follow [Conventional Commits](https://www.conventionalcommits.org/en/) for both commit messages and PR titles.
