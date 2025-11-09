@@ -12,19 +12,20 @@ interface Options {
  * 
  * @param n - The number to format
  * @param options - Configuration options
- * @param options.separator - The separator character (default: ",")
- * @param options.decimal - The decimal separator character (default: ".")
- * @param options.segment - Number of digits per group (default: 3)
+ * @param options.locale - Which language to output
+ * @param options.separator - The separator character
+ * @param options.decimal - The decimal separator character
+ * @param options.segment - Number of digits per group
  * 
  * @returns The formatted number as a string with separators
  * 
  * @example
- * toGrouped(1000000)                    // "1,000,000"
- * toGrouped(1234.56)                    // "1,234.56"
- * toGrouped(1000000, {separator: '.'})       // "1.000.000" (European format)
- * toGrouped(1000000, {separator: ' '})       // "1 000 000"
- * toGrouped(12345678, {segment: 4})     // "1234,5678" (custom grouping)
- * toGrouped(12345678, {segment: [3, 2]})     // "1,23,45,678" (Indian numbering)
+ * toGrouped(1000000) // "1,000,000"
+ * toGrouped(1234.56) // "1,234.56"
+ * toGrouped(1000000, {separator: '.'}) // "1.000.000" (European format)
+ * toGrouped(1000000, {separator: ' ', locale: 'ar'}) // "١ ٠٠٠ ٠٠٠"
+ * toGrouped(12345678, {segment: 4}) // "1234,5678" (custom grouping)
+ * toGrouped(12345678, {segment: [3, 2]}) // "1,23,45,678" (Indian numbering)
  */
 export function toGrouped(
     n: number,
