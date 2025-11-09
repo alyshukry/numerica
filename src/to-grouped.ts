@@ -1,4 +1,4 @@
-import { getLocale, LocaleKey } from "./locales/i18n"
+import { getLocale, LocaleKey } from './locales/i18n'
 
 interface Options {
     locale?: LocaleKey,
@@ -44,8 +44,8 @@ export function toGrouped(
     const parts = n.toString().replace('-', '').split('.')
 
     segment = (Array.isArray(segment) ? segment : [segment])
-        .map(s => Math.floor(s))
-        .filter(s => s > 0)
+        .map((s) => Math.floor(s))
+        .filter((s) => s > 0)
     if (segment.length === 0) segment.push(3) // If empty array was inputted
 
     // Reverse integer part
@@ -71,11 +71,11 @@ export function toGrouped(
         .join('')
         .split('')
         .reverse()
-        .map(d => getLocale(locale).object.digits[parseInt(d, 10)] || d)
+        .map((d) => getLocale(locale).object.digits[parseInt(d, 10)] || d)
         .join('')
     // Localize decimal part digits
     if (parts[1]) {
-        parts[1] = parts[1].split('').map(d => getLocale(locale).object.digits[parseInt(d, 10)] || d).join('')
+        parts[1] = parts[1].split('').map((d) => getLocale(locale).object.digits[parseInt(d, 10)] || d).join('')
     }
 
     return (isNegative ? getLocale(locale).object.number.negative_sign : '') + parts.join(decimal)

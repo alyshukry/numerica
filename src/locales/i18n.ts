@@ -11,7 +11,7 @@ export const locales: Record<NormalizedLocale, Locale> = {
     'en-us': en_us,
     'en-gb': en_gb,
     'de': de,
-    'ar': ar
+    'ar': ar,
 }
 
 let currentLocaleKey: NormalizedLocale = 'en-us'
