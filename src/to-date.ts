@@ -13,9 +13,7 @@ export function toDate({ date }: Options): string {
     const day = String(date.getDate()).padStart(2, '0')
     const month = String(date.getMonth() + 1).padStart(2, '0') // --month having 0th-indexed
     const year = date.getFullYear()
-
-    console.log(day, month, year)
-
+  
     const formattedDate = `${day}/${month}/${year}`
     return formattedDate
 }
