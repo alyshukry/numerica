@@ -43,7 +43,10 @@ export function toGrouped(
     const isNegative = n < 0
     const parts = n.toString().replace('-', '').split('.')
 
-    segment = Array.isArray(segment) ? segment : [segment]
+    segment = (Array.isArray(segment) ? segment : [segment])
+        .map(s => Math.floor(s))
+        .filter(s => s > 0)
+    if (segment.length === 0) segment.push(3) // If empty array was inputted
 
     // Reverse integer part
     const reversed = parts[0].split('').reverse()
