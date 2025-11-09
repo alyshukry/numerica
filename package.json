@@ -18,9 +18,9 @@
         "docs:generate": "typedoc",
         "docs:publish": "npm run docs:generate && echo numerica.js.org > docs/CNAME && git add docs && git diff --cached --quiet || (git commit -m \"docs: update documentation\" && git push)",
         "build": "tsup src/index.ts --format cjs,esm --dts && npm run docs:publish && git add . && git commit -m \"build: compile ts and generate docs\"",
-        "release:patch": "npm version patch -m \"v%s - patch release\" && git push && git push --tags",
-        "release:minor": "npm version minor -m \"v%s - minor release\" && git push && git push --tags",
-        "release:major": "npm version major -m \"v%s - major release\" && git push && git push --tags",
+        "release:patch": "npm version patch -m \"v%s - patch release\" && npm run publish:all",
+        "release:minor": "npm version minor -m \"v%s - minor release\" && npm run publish:all",
+        "release:major": "npm version major -m \"v%s - major release\" && npm run publish:all",
         "publish:all": "git push && git push --tags && npm publish"
     },
     "keywords": [
