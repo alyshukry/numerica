@@ -1,4 +1,7 @@
+import { getLocale, LocaleKey } from "./locales/i18n"
+
 interface Options {
+    locale?: LocaleKey,
     separator?: string,
     decimal?: string,
     segment?: number | number[]
@@ -26,13 +29,15 @@ interface Options {
 export function toGrouped(
     n: number,
     {
-        separator = ',',
-        decimal = '.',
-        segment = 3,
+        locale = getLocale().key,
+        separator = getLocale(locale).object.number.separator,
+        decimal = getLocale(locale).object.number.decimal,
+        segment = getLocale(locale).object.number.grouping,
 
     }: Options = {}): string {
 
-    if (n === Infinity || n === -Infinity) return n.toString()
+    if (n === Infinity) return getLocale(locale).object.number.infinity
+    if (n === -Infinity) return getLocale(locale).object.number.negative_sign + getLocale(locale).object.number.infinity
 
     const isNegative = n < 0
     const parts = n.toString().replace('-', '').split('.')
@@ -56,9 +61,18 @@ export function toGrouped(
     }
 
     string.pop() // Remove leading separator character
-    parts[0] = string.join('').split('').reverse().join('')
 
-    return (isNegative ? '-' : '') + parts.join(decimal)
+    // Localize integer part digits
+    parts[0] = string
+        .join('')
+        .split('')
+        .reverse()
+        .map(d => getLocale(locale).object.digits[parseInt(d, 10)] || d)
+        .join('')
+    // Localize decimal part digits
+    if (parts[1]) {
+        parts[1] = parts[1].split('').map(d => getLocale(locale).object.digits[parseInt(d, 10)] || d).join('')
+    }
+
+    return (isNegative ? getLocale(locale).object.number.negative_sign : '') + parts.join(decimal)
 }
-
-console.log(toGrouped(Infinity, { segment: [3, 2] }))

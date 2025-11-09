@@ -1,0 +1,30 @@
+{
+    "name": "Arabic",
+    "language": "ar",
+    "direction": "rtl",
+    "digits": [
+        "٠",
+        "١",
+        "٢",
+        "٣",
+        "٤",
+        "٥",
+        "٦",
+        "٧",
+        "٨",
+        "٩"
+    ],
+    "number": {
+        "grouping": 3,
+        "separator": "٬",
+        "decimal": "٫",
+        "negative_sign": "−",
+        "infinity": "ما لا نهاية",
+        "nan": "ليس رقم"
+    },
+    "currency": {
+        "symbol": "ج.م",
+        "position": "suffix",
+        "spacing": true
+    }
+}

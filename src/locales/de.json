@@ -1,0 +1,30 @@
+{
+    "name": "Deutsch (DE)",
+    "language": "de",
+    "direction": "ltr",
+    "digits": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+    ],
+    "number": {
+        "grouping": 3,
+        "separator": ".",
+        "decimal": ",",
+        "negative_sign": "-",
+        "infinity": "Unendlich",
+        "nan": "NaN"
+    },
+    "currency": {
+        "symbol": "€",
+        "position": "suffix",
+        "spacing": true
+    }
+}

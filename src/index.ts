@@ -1,3 +1,5 @@
+export * from './locales/i18n'
+
 export * from './to-abbreviated'
 export * from './to-base'
 export * from './to-fraction'
