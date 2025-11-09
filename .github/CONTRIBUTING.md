@@ -1,13 +1,12 @@
 # Collaborating Guide
 Thanks for considering contributing! All improvements are welcome, big or small.
 ## PRs and Code contributions
--   Tests must pass.
--   Follow the existing code style where possible and run `npm run lint`.
--   If you fix a bug, add a test.
-<!-- -   **Pull request targets:**
-    -   **New features and improvements** should go to the **latest version branch** (e.g. `4.x`).
-    -   **Bug fixes for older versions** may go to their corresponding branch (e.g. `2.x`).
-    -   **Never open PRs directly to `main`**, it represents the latest stable release only. -->
+- Tests must pass.
+- Follow the existing code style where possible and run `npm run lint`.
+- If you fix a bug, add a test.
+- Create a branch for your feature (e.g., `feature/short-description`) and commit your changes there.
+- Push that branch to your fork and open a pull request from your branch.
+- Never push directly to `main` — only maintainers push to `main`; all changes must come through PRs for review.
 ## Steps for contributing
 1.  Create an issue for the bug you want to fix or the feature that you want to add.
 2.  Create your own fork on GitHub, then checkout your fork.
