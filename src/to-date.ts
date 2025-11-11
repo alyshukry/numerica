@@ -16,8 +16,8 @@ const TOKENS = [
     'DDDD', // day in words
     'DDD',  // day in short words
     'DD',   // 2-digit day
-    'D',    // 1-digit day
     'Do',   // day in ordinal
+    'D',    // 1-digit day
     'HH',   // 2-digit hour
     'H',    // 1-digit hour
     'mm',   // 2-digit minute
