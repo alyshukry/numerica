@@ -20,11 +20,73 @@
         "decimal": ".",
         "negative_sign": "-",
         "infinity": "Infinity",
-        "nan": "NaN"
+        "nan": "NaN",
+        "ordinal_suffixes": [
+            "th",
+            "st",
+            "nd",
+            "rd"
+        ]
     },
     "currency": {
         "symbol": "£",
         "position": "prefix",
         "spacing": false
+    },
+    "date": {
+        "names": {
+            "weekdays": [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+            ],
+            "short_weekdays": [
+                "Sun",
+                "Mon",
+                "Tue",
+                "Wed",
+                "Thu",
+                "Fri",
+                "Sat"
+            ],
+            "months": [
+                "January",
+                "February",
+                "March",
+                "April",
+                "May",
+                "June",
+                "July",
+                "August",
+                "September",
+                "October",
+                "November",
+                "December"
+            ],
+            "short_months": [
+                "Jan",
+                "Feb",
+                "Mar",
+                "Apr",
+                "May",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Oct",
+                "Nov",
+                "Dec"
+            ]
+        },
+        "format": {
+            "short": "DD/MM/YY",
+            "medium": "DDD, D MMM YY",
+            "long": "D MMMM YYYY",
+            "full": "DDDD, D MMMM YYYY"
+        }
     }
 }

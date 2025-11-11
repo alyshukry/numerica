@@ -20,11 +20,70 @@
         "decimal": ",",
         "negative_sign": "-",
         "infinity": "Unendlich",
-        "nan": "NaN"
+        "nan": "NaN",
+        "ordinal_suffixes": [
+            "."
+        ]
     },
     "currency": {
         "symbol": "€",
         "position": "suffix",
         "spacing": true
+    },
+    "date": {
+        "names": {
+            "weekdays": [
+                "Sonntag",
+                "Montag",
+                "Dienstag",
+                "Mittwoch",
+                "Donnerstag",
+                "Freitag",
+                "Samstag"
+            ],
+            "short_weekdays": [
+                "So",
+                "Mo",
+                "Di",
+                "Mi",
+                "Do",
+                "Fr",
+                "Sa"
+            ],
+            "months": [
+                "Januar",
+                "Februar",
+                "März",
+                "April",
+                "Mai",
+                "Juni",
+                "Juli",
+                "August",
+                "September",
+                "Oktober",
+                "November",
+                "Dezember"
+            ],
+            "short_months": [
+                "Jan",
+                "Feb",
+                "Mär",
+                "Apr",
+                "Mai",
+                "Jun",
+                "Jul",
+                "Aug",
+                "Sep",
+                "Okt",
+                "Nov",
+                "Dez"
+            ]
+        },
+        "format": {
+            "short": "DD.MM.YY",
+            "medium": "DDD, D. MMM YY",
+            "long": "D. MMMM YYYY",
+            "full": "DDDD, D. MMMM YYYY"
+        }
     }
 }
