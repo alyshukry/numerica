@@ -112,3 +112,58 @@ describe("toWords() — potential improvements", () => {
         expect(true).toBe(true)
     })
 })
+
+// Negative numbers
+describe.each([
+    [-1, {}, "negative one"],
+    [-9, {}, "negative nine"],
+    [-10, {}, "negative ten"],
+    [-11, {}, "negative eleven"],
+    [-15, {}, "negative fifteen"],
+    [-20, {}, "negative twenty"],
+    [-21, {}, "negative twenty one"],
+    [-99, {}, "negative ninety nine"],
+    [-100, {}, "negative one hundred"],
+    [-101, {}, "negative one hundred one"],
+    [-110, {}, "negative one hundred ten"],
+    [-115, {}, "negative one hundred fifteen"],
+    [-123, {}, "negative one hundred twenty three"],
+    [-999, {}, "negative nine hundred ninety nine"]
+])("toWords() — negative integers", (n, options, expected) => {
+    it(`should convert ${n} to "${expected}"`, () => {
+        expect(toWords(n, options)).toBe(expected)
+    })
+})
+
+// Negative numbers with 'and'
+describe.each([
+    [-101, { and: true }, "negative one hundred and one"],
+    [-120, { and: true }, "negative one hundred and twenty"],
+    [-999, { and: true }, "negative nine hundred and ninety nine"]
+])("toWords() — negative integers with 'and'", (n, options, expected) => {
+    it(`should include 'and' correctly for ${n}`, () => {
+        expect(toWords(n, options)).toBe(expected)
+    })
+})
+
+// Negative numbers with hyphens
+describe.each([
+    [-21, { hyphens: true }, "negative twenty-one"],
+    [-45, { hyphens: true }, "negative forty-five"],
+    [-99, { hyphens: true }, "negative ninety-nine"]
+])("toWords() — negative integers with hyphens", (n, options, expected) => {
+    it(`should hyphenate correctly for ${n}`, () => {
+        expect(toWords(n, options)).toBe(expected)
+    })
+})
+
+// Negative decimals
+describe.each([
+    [-3.14, {}, "negative three point one four"],
+    [-0.5, {}, "negative zero point five"],
+    [-12.34, { hyphens: true }, "negative twelve point three four"]
+])("toWords() — negative decimal numbers", (n, options, expected) => {
+    it(`should correctly spell negative decimal ${n}`, () => {
+        expect(toWords(n, options)).toBe(expected)
+    })
+})
