@@ -56,6 +56,9 @@ export function toWords(
 
     if (n === 0) return 'zero'
 
+    const isNegative = n < 0
+    n = Math.abs(n)
+
     const parts: string[] = []
     const [intStr, decStr] = n.toString().split('.')
     let intNum = Math.floor(Math.abs(Number(intStr)))
@@ -101,7 +104,8 @@ export function toWords(
         }
     }
 
-    return parts.join(separator).replace(/\s+/g, ' ').trim()
+    const final = parts.join(separator).replace(/\s+/g, ' ').trim()
+    return isNegative ? "negative " + final : final
 }
 
 // Converts a 3-digit chunk into words
