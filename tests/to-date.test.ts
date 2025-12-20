@@ -286,3 +286,35 @@ describe.each([
         expect(toDate(date, options)).toBe(expected)
     })
 })
+
+// Escape character tests
+describe.each([
+    [new Date(2025, 10, 12), { format: "\\YYYY" }, "YYYY"],
+    [new Date(2025, 10, 12), { format: "\\YY\\YY" }, "YYYY"],
+    [new Date(2025, 10, 12), { format: "Year: \\YYYY i\\s YYYY" }, "Year: YYYY is 2025"],
+    [new Date(2025, 10, 12), { format: "\\MMMM MMMM" }, "MMMM November"],
+    [new Date(2025, 10, 12), { format: "\\DD/\\MM/YYYY" }, "DD/MM/2025"],
+    [new Date(2025, 10, 12), { format: "\\D\\D\\D\\D" }, "DDDD"],
+    [new Date(2025, 10, 12), { format: "DDDD i\\s \\DDDD" }, "Wednesday is DDDD"],
+    [new Date(2025, 10, 12, 14, 30), { format: "\\HH:\\mm = HH:mm" }, "HH:mm = 14:30"],
+    [new Date(2025, 10, 12), { format: "\\Do Do" }, "Do 12th"],
+    [new Date(2025, 10, 12), { format: "\\M\\M\\M\\M MMMM" }, "MMMM November"],
+    [new Date(2025, 10, 12), { format: "\\\\YYYY" }, "\\2025"],
+    [new Date(2025, 10, 12), { format: "\\Date\\: YYYY-MM-DD" }, "Date: 2025-11-12"]
+])("toDate() — escape character", (date, options, expected) => {
+    it(`should escape tokens with backslash`, () => {
+        expect(toDate(date, options)).toBe(expected)
+    })
+})
+
+// Escape character with locales
+describe.each([
+    [new Date(2025, 10, 12), { locale: 'de' as LocaleKey, format: "\\DD.MM.YYYY" }, "DD.11.2025"],
+    [new Date(2025, 10, 12), { locale: 'ar' as LocaleKey, format: "\\YYYY/MM/DD" }, "YYYY/١١/١٢"],
+    [new Date(2025, 10, 12), { locale: 'de' as LocaleKey, format: "Tag \\D: D" }, "Tag D: 12"],
+    [new Date(2025, 10, 12), { locale: 'ar' as LocaleKey, format: "\\MMMM: MMMM" }, "MMMM: نوفمبر"]
+])("toDate() — escape character with locales", (date, options, expected) => {
+    it(`should escape tokens correctly with locale ${options.locale}`, () => {
+        expect(toDate(date, options)).toBe(expected)
+    })
+})
