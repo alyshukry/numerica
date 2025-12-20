@@ -72,21 +72,21 @@ export function toDate(
         format = getLocale(locale).object.date.format.short,
         timezone = 'UTC+0',
 
-    }: Options): string {
+    }: Options = {}): string {
 
     switch (format) {
-    case 'short':
-        format = getLocale(locale).object.date.format.short
-        break
-    case 'medium':
-        format = getLocale(locale).object.date.format.medium
-        break
-    case 'long':
-        format = getLocale(locale).object.date.format.long
-        break
-    case 'full':
-        format = getLocale(locale).object.date.format.full
-        break
+        case 'short':
+            format = getLocale(locale).object.date.format.short
+            break
+        case 'medium':
+            format = getLocale(locale).object.date.format.medium
+            break
+        case 'long':
+            format = getLocale(locale).object.date.format.long
+            break
+        case 'full':
+            format = getLocale(locale).object.date.format.full
+            break
     }
 
     const tokens: string[] = []
@@ -95,7 +95,8 @@ export function toDate(
         let match = false
         for (const t of TOKENS) {
             if (format.startsWith(t, i)) {
-                tokens.push(t)
+                if (tokens[tokens.length - 1] === '\\') tokens[tokens.length - 1] = '\\' + t
+                else tokens.push(t)
                 i += t.length
                 match = true
                 break
@@ -106,19 +107,48 @@ export function toDate(
             i++
         }
     }
+    console.log(tokens, format)
 
     function pad(num: string, length: number, locale: LocaleKey): string {
         const zero = getLocale(locale).object.digits[0]
         while (num.length < length) num = zero + num
         return num
     }
+
     function toLocaleDigits(num: number, locale: LocaleKey): string {
         const digits = getLocale(locale).object.digits
         return num.toString().replace(/\d/g, (d) => digits[+d])
     }
+
+    function getOrdinalSuffix(day: number, locale: LocaleKey): string {
+        const ordinalSuffixes = getLocale(locale).object.number.ordinal_suffixes
+
+        // English-style ordinals (en-US, en-GB): [th, st, nd, rd]
+        if (ordinalSuffixes.length === 4) {
+            const lastDigit = day % 10
+            const lastTwoDigits = day % 100
+
+            if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
+                return ordinalSuffixes[0]
+            }
+            if (lastDigit === 1) {
+                return ordinalSuffixes[1]
+            }
+            if (lastDigit === 2) {
+                return ordinalSuffixes[2]
+            }
+            if (lastDigit === 3) {
+                return ordinalSuffixes[3]
+            }
+            return ordinalSuffixes[0]
+        }
+
+        return ordinalSuffixes[0]
+    }
+
     const tokenMap: Record<string, (date: Date) => string> = {
-        YYYY: (d) => toLocaleDigits(d.getFullYear(), getLocale(locale).key),
-        YY: (d) => toLocaleDigits(d.getFullYear() % 100, getLocale(locale).key),
+        YYYY: (d) => pad(toLocaleDigits(d.getFullYear(), getLocale(locale).key), 4, getLocale(locale).key),
+        YY: (d) => pad(toLocaleDigits(d.getFullYear() % 100, getLocale(locale).key), 2, getLocale(locale).key),
 
         MMMM: (d) => getLocale(locale).object.date.names.months[d.getMonth()],
         MMM: (d) => getLocale(locale).object.date.names.short_months[d.getMonth()],
@@ -131,8 +161,7 @@ export function toDate(
         D: (d) => toLocaleDigits(d.getDate(), getLocale(locale).key),
         Do: (d) => {
             const day = d.getDate()
-            const suffix = getLocale(locale).object.number.ordinal_suffixes[day]
-                ?? getLocale(locale).object.number.ordinal_suffixes[0]
+            const suffix = getOrdinalSuffix(day, getLocale(locale).key)
             return toLocaleDigits(day, getLocale(locale).key) + suffix
         },
 
@@ -146,7 +175,9 @@ export function toDate(
         s: (d) => toLocaleDigits(d.getSeconds(), getLocale(locale).key),
     }
 
-    const string = tokens.map((t) => tokenMap[t]?.(date) ?? t).join('')
+    const string = tokens
+        .map(t => t.startsWith('\\') ? t.slice(1) : tokenMap[t]?.(date) ?? t)
+        .join('');
 
     return string
 }
