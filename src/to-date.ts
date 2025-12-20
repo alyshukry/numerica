@@ -70,7 +70,7 @@ export function toDate(
     {
         locale = getLocale().key,
         format = getLocale(locale).object.date.format.short,
-        timezone = 'UTC+0',
+        timezone = 'local',
 
     }: Options = {}): string {
 
