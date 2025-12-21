@@ -1,0 +1,94 @@
+{
+    "name": "Español",
+    "language": "es",
+    "direction": "ltr",
+    "digits": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+    ],
+    "number": {
+        "grouping": 3,
+        "separator": ".",
+        "decimal": ",",
+        "negative_sign": "-",
+        "infinity": "∞",
+        "nan": "NaN",
+        "ordinal": {
+            "position": "suffix",
+            "type": "fixed",
+            "gender": {
+                "fem": "ª",
+                "masc": "º"
+            }
+        }
+    },
+    "currency": {
+        "symbol": "€",
+        "position": "suffix",
+        "spacing": true
+    },
+    "date": {
+        "names": {
+            "weekdays": [
+                "domingo",
+                "lunes",
+                "martes",
+                "miércoles",
+                "jueves",
+                "viernes",
+                "sábado"
+            ],
+            "short_weekdays": [
+                "dom",
+                "lun",
+                "mar",
+                "mié",
+                "jue",
+                "vie",
+                "sáb"
+            ],
+            "months": [
+                "enero",
+                "febrero",
+                "marzo",
+                "abril",
+                "mayo",
+                "junio",
+                "julio",
+                "agosto",
+                "septiembre",
+                "octubre",
+                "noviembre",
+                "diciembre"
+            ],
+            "short_months": [
+                "ene",
+                "feb",
+                "mar",
+                "abr",
+                "may",
+                "jun",
+                "jul",
+                "ago",
+                "sep",
+                "oct",
+                "nov",
+                "dic"
+            ]
+        },
+        "format": {
+            "short": "DD/MM/YY",
+            "medium": "DD MMM YYYY",
+            "long": "DD de MMMM de YYYY",
+            "full": "DDDD, DD de MMMM de YYYY"
+        }
+    }
+}
