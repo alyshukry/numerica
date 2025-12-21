@@ -1,9 +1,11 @@
-import { getLocale, LocaleKey } from './locales/i18n'
+import { getLocale, LocaleKey, toLocaleDigits } from './locales/i18n'
+import { toOrdinal } from './to-ordinal'
 
 interface Options {
     locale?: LocaleKey,
     format?: string,
     timezone?: string,
+    grammar?: Record<string, string>,
 }
 
 const TOKENS = [
@@ -71,6 +73,9 @@ export function toDate(
         locale = getLocale().key,
         format = getLocale(locale).object.date.format.short,
         timezone = 'local',
+        grammar = {
+            gender: "masc"
+        }
 
     }: Options = {}): string {
 
@@ -122,64 +127,31 @@ export function toDate(
         return num
     }
 
-    function toLocaleDigits(num: number, locale: LocaleKey): string {
-        const digits = getLocale(locale).object.digits
-        return num.toString().replace(/\d/g, (d) => digits[+d])
-    }
-
-    function getOrdinalSuffix(day: number, locale: LocaleKey): string {
-        const ordinalSuffixes = getLocale(locale).object.number.ordinal_suffixes
-
-        // English-style ordinals (en-US, en-GB): [th, st, nd, rd]
-        if (ordinalSuffixes.length === 4) {
-            const lastDigit = day % 10
-            const lastTwoDigits = day % 100
-
-            if (lastTwoDigits >= 11 && lastTwoDigits <= 13) {
-                return ordinalSuffixes[0]
-            }
-            if (lastDigit === 1) {
-                return ordinalSuffixes[1]
-            }
-            if (lastDigit === 2) {
-                return ordinalSuffixes[2]
-            }
-            if (lastDigit === 3) {
-                return ordinalSuffixes[3]
-            }
-            return ordinalSuffixes[0]
-        }
-
-        return ordinalSuffixes[0]
-    }
-
     const tokenMap: Record<string, (date: Date) => string> = {
-        'YYYY': (d) => pad(toLocaleDigits(d.getFullYear(), getLocale(locale).key), 4, getLocale(locale).key),
-        'YY': (d) => pad(toLocaleDigits(d.getFullYear() % 100, getLocale(locale).key), 2, getLocale(locale).key),
+        'YYYY': (d) => pad(toLocaleDigits(getLocale(locale).key, d.getFullYear()), 4, getLocale(locale).key),
+        'YY': (d) => pad(toLocaleDigits(getLocale(locale).key, d.getFullYear() % 100), 2, getLocale(locale).key),
 
         'MMMM': (d) => getLocale(locale).object.date.names.months[d.getMonth()],
         'MMM': (d) => getLocale(locale).object.date.names.short_months[d.getMonth()],
-        'MM': (d) => pad(toLocaleDigits(d.getMonth() + 1, getLocale(locale).key), 2, getLocale(locale).key),
-        'M': (d) => toLocaleDigits(d.getMonth() + 1, getLocale(locale).key),
+        'MM': (d) => pad(toLocaleDigits(getLocale(locale).key, d.getMonth() + 1), 2, getLocale(locale).key),
+        'M': (d) => toLocaleDigits(getLocale(locale).key, d.getMonth() + 1),
 
         'DDDD': (d) => getLocale(locale).object.date.names.weekdays[d.getDay()],
         'DDD': (d) => getLocale(locale).object.date.names.short_weekdays[d.getDay()],
-        'DD': (d) => pad(toLocaleDigits(d.getDate(), getLocale(locale).key), 2, getLocale(locale).key),
-        'D': (d) => toLocaleDigits(d.getDate(), getLocale(locale).key),
+        'DD': (d) => pad(toLocaleDigits(getLocale(locale).key, d.getDate()), 2, getLocale(locale).key),
+        'D': (d) => toLocaleDigits(getLocale(locale).key, d.getDate()),
         'Do': (d) => {
-            const day = d.getDate()
-            const suffix = getOrdinalSuffix(day, getLocale(locale).key)
-            return toLocaleDigits(day, getLocale(locale).key) + suffix
+            return toOrdinal(d.getDate(), { locale: locale, grammar: { gender: grammar.gender } })
         },
 
-        'HH': (d) => pad(toLocaleDigits(d.getHours(), getLocale(locale).key), 2, getLocale(locale).key),
-        'H': (d) => toLocaleDigits(d.getHours(), getLocale(locale).key),
+        'HH': (d) => pad(toLocaleDigits(getLocale(locale).key, d.getHours()), 2, getLocale(locale).key),
+        'H': (d) => toLocaleDigits(getLocale(locale).key, d.getHours()),
 
-        'mm': (d) => pad(toLocaleDigits(d.getMinutes(), getLocale(locale).key), 2, getLocale(locale).key),
-        'm': (d) => toLocaleDigits(d.getMinutes(), getLocale(locale).key),
+        'mm': (d) => pad(toLocaleDigits(getLocale(locale).key, d.getMinutes()), 2, getLocale(locale).key),
+        'm': (d) => toLocaleDigits(getLocale(locale).key, d.getMinutes()),
 
-        'ss': (d) => pad(toLocaleDigits(d.getSeconds(), getLocale(locale).key), 2, getLocale(locale).key),
-        's': (d) => toLocaleDigits(d.getSeconds(), getLocale(locale).key),
+        'ss': (d) => pad(toLocaleDigits(getLocale(locale).key, d.getSeconds()), 2, getLocale(locale).key),
+        's': (d) => toLocaleDigits(getLocale(locale).key, d.getSeconds()),
     }
 
     const string = tokens
