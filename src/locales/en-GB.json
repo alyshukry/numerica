@@ -21,12 +21,29 @@
         "negative_sign": "-",
         "infinity": "Infinity",
         "nan": "NaN",
-        "ordinal_suffixes": [
-            "th",
-            "st",
-            "nd",
-            "rd"
-        ]
+        "ordinal": {
+            "position": "suffix",
+            "type": "rules",
+            "rules": [
+                {
+                    "mod": 100,
+                    "values": {
+                        "11": "th",
+                        "12": "th",
+                        "13": "th"
+                    }
+                },
+                {
+                    "mod": 10,
+                    "values": {
+                        "1": "st",
+                        "2": "nd",
+                        "3": "rd"
+                    },
+                    "default": "th"
+                }
+            ]
+        }
     },
     "currency": {
         "symbol": "£",

@@ -1,5 +1,5 @@
 {
-    "name": "Arabic",
+    "name": "العربية",
     "language": "ar",
     "direction": "rtl",
     "digits": [
@@ -21,9 +21,11 @@
         "negative_sign": "−",
         "infinity": "ما لا نهاية",
         "nan": "ليس رقم",
-        "ordinal_suffixes": [
-            "º"
-        ]
+        "ordinal": {
+            "position": "suffix",
+            "type": "fixed",
+            "value": "º"
+        }
     },
     "currency": {
         "symbol": "ج.م",

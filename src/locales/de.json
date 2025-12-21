@@ -21,9 +21,12 @@
         "negative_sign": "-",
         "infinity": "Unendlich",
         "nan": "NaN",
-        "ordinal_suffixes": [
-            "."
-        ]
+        "ordinal": {
+            "position": "suffix",
+            "type": "fixed",
+            "value": "."
+
+        }
     },
     "currency": {
         "symbol": "€",
