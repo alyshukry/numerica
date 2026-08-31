@@ -6,7 +6,7 @@
     </picture>
 </p>
 <h3 align="center" style="font-family: monospace;">
-    A utility library for number formatting.<br>String-to-number parsing coming soon.
+    A utility library for number formatting.
 </h3>
 <br>
 
